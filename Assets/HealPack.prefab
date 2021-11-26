@@ -131,6 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healValue: 5
   objectPool: {fileID: 0}
+  healEffect: {fileID: 751029183651457994, guid: 89ede21cbaaf33044aa9f4fd41530e79, type: 3}
 --- !u!212 &5580782876494661829
 SpriteRenderer:
   m_ObjectHideFlags: 0

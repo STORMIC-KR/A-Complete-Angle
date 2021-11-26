@@ -7,17 +7,11 @@ public class HealPack : MonoBehaviour
     public int healValue;
 
     public ObjectPool objectPool;
+    public GameObject healEffect;
 
-    // Start is called before the first frame update
     void Start()
     {
         objectPool = FindObjectOfType<ObjectPool>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -29,7 +23,7 @@ public class HealPack : MonoBehaviour
             if(player.cur_playerHealth < player.max_playerHealth)
             {
                 player.cur_playerHealth += healValue;
-
+                Instantiate(healEffect, transform.position, Quaternion.identity);
                 Debug.Log("Eat HP!");
                 gameObject.SetActive(false);
 

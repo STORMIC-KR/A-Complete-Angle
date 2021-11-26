@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
 
     IEnumerator AlphaBlink()
     {
-        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0);
+        sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f);
         yield return new WaitForSeconds(0.1f);
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
     }
