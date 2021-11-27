@@ -59,7 +59,6 @@ public class Player : MonoBehaviour
         killCountText.text = "Kill : " + killEnemyCount;
 
         WeaponSwap();
-        //ZoomMinimap();
     }
 
     void FixedUpdate()

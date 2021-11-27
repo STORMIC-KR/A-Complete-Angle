@@ -10,17 +10,13 @@ public class Bullet : MonoBehaviour
     public int damage;
 
     public float maxDistance;
-
-    // Start is called before the first frame update
     void Start()
     {
         targetPlayer = GameObject.Find("Player").transform;
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
-        //Invoke("DestroyBullet", lifeTime);
         transform.Translate(Vector2.up * speed * Time.deltaTime);
 
         if(Vector3.Distance(targetPlayer.position, transform.position) >= maxDistance)

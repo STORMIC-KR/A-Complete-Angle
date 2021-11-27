@@ -27,7 +27,6 @@ public class Enemy : MonoBehaviour
     [Header("ItemDrop")]
     public GameObject healPack;
 
-    // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<Player>();
@@ -41,7 +40,6 @@ public class Enemy : MonoBehaviour
         maxEnemyHealth = enemyHealth;
     }
 
-    // Update is called once per frame
     void Update()
     {
         Vector3 direction = targetPlayer.position - transform.position;
@@ -76,7 +74,6 @@ public class Enemy : MonoBehaviour
                 GameObject bulletObj = objectPool.MakeObject("EnemyBullet");
                 bulletObj.transform.position = shotPoint.position;
                 bulletObj.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-                //Instantiate(bullet, shotPoint.position, Quaternion.AngleAxis(angle - 90, Vector3.forward));
                 shotTime = Time.time + timeBtwShots;
             }
         }
@@ -105,7 +102,6 @@ public class Enemy : MonoBehaviour
             {
                 GameObject healPack = objectPool.MakeObject("HealPack");
                 healPack.transform.position = shotPoint.position;
-                //Instantiate(healPack, transform.position, Quaternion.identity);
             }
             gameObject.SetActive(false);
             player.killEnemyCount++;

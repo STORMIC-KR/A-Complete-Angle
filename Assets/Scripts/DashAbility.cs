@@ -14,8 +14,7 @@ public class DashAbility : Ability
         SpriteRenderer sr = parent.GetComponent<SpriteRenderer>();
 
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f);
-
-        //rb.velocity = player.movementInput.normalized * dashVelocity;
+        
         player.acceleration = dashVelocity;
         parent.GetComponent<CircleCollider2D>().enabled = false;
         Debug.Log("Dash Activate");
