@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveSpawnSystem : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class WaveSpawnSystem : MonoBehaviour
 
     public string[] enemies;
     public ObjectPool objectPool;
+
+    public Text waveText;
+    public int waveNum = 1;
 
     public float spawnRate = 1.0f;
     public float timeBtwWaves = 3.0f;
@@ -25,6 +29,7 @@ public class WaveSpawnSystem : MonoBehaviour
     
     void Update()
     {
+        waveText.text = "Wave \n" + waveNum;
         if(waveIsDone == true)
         {
             StartCoroutine(WaveSpawn());
@@ -50,6 +55,7 @@ public class WaveSpawnSystem : MonoBehaviour
             yield return new WaitForSeconds(spawnRate);
         }
 
+        waveNum += 1;
         waveIsDone = true;
         spawnRate -= 0.1f;
         spawningEnemyCount += 1;

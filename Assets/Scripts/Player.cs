@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
 
         healthBar.value = (float)cur_playerHealth / (float)max_playerHealth;
 
-        killCountText.text = "Kill : " + killEnemyCount;
+        killCountText.text = "Kill \n" + killEnemyCount;
 
         WeaponSwap();
     }
