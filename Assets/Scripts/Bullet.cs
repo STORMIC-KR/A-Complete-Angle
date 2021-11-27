@@ -8,8 +8,7 @@ public class Bullet : MonoBehaviour
     public float speed;
     public float lifeTime;
     public int damage;
-
-    public float maxDistance;
+    
     void Start()
     {
         targetPlayer = GameObject.Find("Player").transform;
@@ -18,11 +17,6 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector2.up * speed * Time.deltaTime);
-
-        if(Vector3.Distance(targetPlayer.position, transform.position) >= maxDistance)
-        {
-            DestroyBullet();
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -33,10 +27,18 @@ public class Bullet : MonoBehaviour
             {
                 DestroyBullet();
             }
+            else if(other.CompareTag("RoomWall"))
+            {
+                DestroyBullet();
+            }
         }
         else if(gameObject.CompareTag("Bullet"))
         {
             if(other.CompareTag("Enemy"))
+            {
+                DestroyBullet();
+            }
+            else if(other.CompareTag("RoomWall"))
             {
                 DestroyBullet();
             }
@@ -45,7 +47,7 @@ public class Bullet : MonoBehaviour
 
     void DestroyBullet()
     {
-        this.gameObject.SetActive(false);
+        gameObject.SetActive(false);
         Debug.Log("Bullet Destroyed");
     }
 }

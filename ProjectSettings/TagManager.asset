@@ -9,6 +9,7 @@ TagManager:
   - Giant_Bullet
   - Enemy
   - HealPack
+  - RoomWall
   layers:
   - Default
   - TransparentFX

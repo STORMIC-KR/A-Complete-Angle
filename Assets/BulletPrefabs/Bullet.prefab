@@ -138,4 +138,4 @@ MonoBehaviour:
   speed: 20
   lifeTime: 2
   damage: 5
-  maxDistance: 15
+  maxDistance: 25
