@@ -23,23 +23,8 @@ public class EnemyRandomSpawner : MonoBehaviour
 
     private void Update()
     {
-        //Invoke("SpawnRandomEnemy", time);
         enemyCount = GameObject.FindGameObjectsWithTag("Enemy");
     }
-
-    // void SpawnRandomEnemy()
-    // {
-    //     int ranEnemy = Random.Range(0, enemies.Length);
-
-    //     Vector2 spawnPos = GameObject.Find("Player").transform.position;
-    //     spawnPos += Random.insideUnitCircle.normalized * spawnRadius;
-
-    //     GameObject enemy = objectPool.MakeObject(enemies[ranEnemy]);
-    //     enemy.transform.position = spawnPos;
-    //     enemy.transform.rotation = Quaternion.identity;
-
-    //     //Instantiate(enemies[Random.Range(0, enemies.Length)], spawnPos, Quaternion.identity);
-    // }
 
     IEnumerator SpawnEnemy()
     {
@@ -51,8 +36,7 @@ public class EnemyRandomSpawner : MonoBehaviour
         GameObject enemy = objectPool.MakeObject(enemies[ranEnemy]);
         enemy.transform.position = spawnPos;
         enemy.transform.rotation = Quaternion.identity;
-
-        //Instantiate(enemies[Random.Range(0, enemies.Length)], spawnPos, Quaternion.identity);
+        
         yield return new WaitForSeconds(time);
         StartCoroutine(SpawnEnemy());
     }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AttackWeapon : MonoBehaviour
 {
-    //public GameObject bullet;
     public Transform shotPoint;
     public float timeBtwShots;
     private float shotTime;
@@ -41,7 +40,6 @@ public class AttackWeapon : MonoBehaviour
                 GameObject bullet = objectPool.MakeObject("Bullet");
                 bullet.transform.position = shotPoint.position;
                 bullet.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-                //Instantiate(bullet, shotPoint.position, Quaternion.AngleAxis(angle - 90, Vector3.forward));
                 shotTime = Time.time + timeBtwShots;
             }
         }
