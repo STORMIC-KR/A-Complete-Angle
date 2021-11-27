@@ -16,7 +16,7 @@ public class DashAbility : Ability
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f);
         
         player.acceleration = dashVelocity;
-        parent.GetComponent<CircleCollider2D>().enabled = false;
+        //parent.GetComponent<CircleCollider2D>().enabled = false;
         Debug.Log("Dash Activate");
     }
     
@@ -29,7 +29,7 @@ public class DashAbility : Ability
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1f);
 
         player.acceleration = player.normalAcceleration;
-        parent.GetComponent<CircleCollider2D>().enabled = true;
+        //parent.GetComponent<CircleCollider2D>().enabled = true;
         Debug.Log("CoolDown");
     }
 }

@@ -6,6 +6,8 @@ public class WaveSpawnSystem : MonoBehaviour
 {
     [SerializeField] private float spawnRadius = 5f;
 
+    [SerializeField] private float maxX, minX, maxY, minY;
+
     public string[] enemies;
     public ObjectPool objectPool;
 
@@ -36,12 +38,13 @@ public class WaveSpawnSystem : MonoBehaviour
         for(int i = 0; i < spawningEnemyCount; i++)
         {
             int ranEnemy = Random.Range(0, enemies.Length);
-
-            Vector2 spawnPos = GameObject.Find("Player").transform.position;
-            spawnPos += Random.insideUnitCircle.normalized * spawnRadius;
+            float ranX_pos = Random.Range(minX, maxX);
+            float ranY_pos = Random.Range(minY, maxY);
+            
+            Vector2 spawnPosition = new Vector2(ranX_pos, ranY_pos);
 
             GameObject enemy = objectPool.MakeObject(enemies[ranEnemy]);
-            enemy.transform.position = spawnPos;
+            enemy.transform.position = spawnPosition;
             enemy.transform.rotation = Quaternion.identity;
 
             yield return new WaitForSeconds(spawnRate);
