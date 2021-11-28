@@ -38,7 +38,10 @@ public class GameManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            Application.Quit();
+            if(SceneManager.GetActiveScene().buildIndex == 0)
+            {
+                Application.Quit();
+            }
         }
 
         HelpText();

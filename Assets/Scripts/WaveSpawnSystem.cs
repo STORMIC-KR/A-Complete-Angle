@@ -13,7 +13,7 @@ public class WaveSpawnSystem : MonoBehaviour
     public ObjectPool objectPool;
 
     public Text waveText;
-    public int waveNum = 1;
+    public int waveNum = 0;
 
     public float spawnRate = 1.0f;
     public float timeBtwWaves = 3.0f;
