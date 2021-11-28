@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 371772073656985314}
   - component: {fileID: 6321025392229040157}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: MinimapIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}

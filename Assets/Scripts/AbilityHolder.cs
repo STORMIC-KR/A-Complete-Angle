@@ -18,7 +18,6 @@ public class AbilityHolder : MonoBehaviour
     }
     AbilityState state = AbilityState.ready;
 
-
     void Update()
     {
         switch(state)

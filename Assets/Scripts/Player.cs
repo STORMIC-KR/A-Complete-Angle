@@ -108,19 +108,19 @@ public class Player : MonoBehaviour
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
     }
 
-    void ZoomMinimap()
-    {
-        if(Input.GetKey(KeyCode.C))
-        {
-            mapAnimator.SetFloat("speed", 1);
-            mapAnimator.Play("MinimapZoom");
-        }
-        if(Input.GetKeyUp(KeyCode.C))
-        {
-            mapAnimator.SetFloat("speed", -1);
-            mapAnimator.Play("MinimapZoom");
-        }
-    }
+    // void ZoomMinimap()
+    // {
+    //     if(Input.GetKey(KeyCode.C))
+    //     {
+    //         mapAnimator.SetFloat("speed", 1);
+    //         mapAnimator.Play("MinimapZoom");
+    //     }
+    //     if(Input.GetKeyUp(KeyCode.C))
+    //     {
+    //         mapAnimator.SetFloat("speed", -1);
+    //         mapAnimator.Play("MinimapZoom");
+    //     }
+    // }
     
     private void OnTriggerEnter2D(Collider2D other)
     {

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1774994124213955092}
   - component: {fileID: 5886004139665955719}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: MinimapIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2683980823373561227}
   - component: {fileID: 2683980823373561226}
   - component: {fileID: 8243145174383682378}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Normal_Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

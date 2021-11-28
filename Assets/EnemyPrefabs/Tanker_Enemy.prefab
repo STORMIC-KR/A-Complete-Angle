@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4976653951838347945}
   - component: {fileID: 597765394725645992}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: MinimapIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 1114736989960834566}
   - component: {fileID: 1114736989960834565}
   - component: {fileID: 2203253394504966867}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tanker_Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
