@@ -9,22 +9,25 @@ public class ObjectPool : MonoBehaviour
     public GameObject normal_Enemy_Prefab;
     public GameObject tanker_Enemy_Prefab;
     public GameObject healPack_Prefab;
+    public GameObject speedUp_Prefab;
 
     GameObject[] bullet;
     GameObject[] enemy_Bullet;
     GameObject[] normal_Enemy;
     GameObject[] tanker_Enemy;
     GameObject[] healPack;
+    GameObject[] speedUp_Item;
 
     GameObject[] targetPool;
 
     void Awake()
     {
-        bullet = new GameObject[10];
+        bullet = new GameObject[50];
         enemy_Bullet = new GameObject[50];
         normal_Enemy = new GameObject[50];
         tanker_Enemy = new GameObject[50];
-        healPack = new GameObject[20];
+        healPack = new GameObject[50];
+        speedUp_Item = new GameObject[50];
 
         Generate();
     }
@@ -60,6 +63,12 @@ public class ObjectPool : MonoBehaviour
             healPack[index] = Instantiate(healPack_Prefab);
             healPack[index].SetActive(false);
         }
+
+        for(int index = 0; index < speedUp_Item.Length; index++)
+        {
+            speedUp_Item[index] = Instantiate(speedUp_Prefab);
+            speedUp_Item[index].SetActive(false);
+        }
     }
 
     public GameObject MakeObject(string type)
@@ -80,6 +89,9 @@ public class ObjectPool : MonoBehaviour
                 break;
             case "HealPack":
                 targetPool = healPack;
+                break;
+            case "SpeedUp":
+                targetPool = speedUp_Item;
                 break;
         }
 

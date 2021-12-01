@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
 
     [Header("ItemDrop")]
     public GameObject healPack;
+    public GameObject speedUp;
 
     void Start()
     {
@@ -98,10 +99,15 @@ public class Enemy : MonoBehaviour
             {
                 Debug.Log("No Item");
             }
-            else if(ran < 8)
+            else if(ran < 7)
             {
                 GameObject healPack = objectPool.MakeObject("HealPack");
-                healPack.transform.position = shotPoint.position;
+                healPack.transform.position = transform.position;
+            }
+            else if(ran < 8)
+            {
+                GameObject speedUp = objectPool.MakeObject("SpeedUp");
+                speedUp.transform.position = transform.position;
             }
             gameObject.SetActive(false);
             player.killEnemyCount++;

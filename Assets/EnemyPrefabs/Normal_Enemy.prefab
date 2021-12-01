@@ -143,6 +143,7 @@ MonoBehaviour:
   shotPoint: {fileID: 2683980823767716390}
   timeBtwShots: 1
   healPack: {fileID: 5580782876494661826, guid: 4d4813dee94ddae44a93ffea67e95232, type: 3}
+  speedUp: {fileID: 4805856810930162458, guid: 4c45e81b8e5ff774a873ee7940c8d044, type: 3}
 --- !u!212 &2683980823373561220
 SpriteRenderer:
   m_ObjectHideFlags: 0

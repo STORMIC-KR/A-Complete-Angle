@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7390241416388671212}
   - component: {fileID: 4142649889807867995}
   - component: {fileID: 7390241416388671213}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -138,4 +138,3 @@ MonoBehaviour:
   speed: 20
   lifeTime: 2
   damage: 5
-  maxDistance: 25
