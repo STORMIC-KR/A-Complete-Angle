@@ -106,7 +106,7 @@ public class Enemy : MonoBehaviour
             }
             else if(ran < 8)
             {
-                GameObject speedUp = objectPool.MakeObject("SpeedUp");
+                GameObject speedUp = objectPool.MakeObject("ShootUp");
                 speedUp.transform.position = transform.position;
             }
             gameObject.SetActive(false);

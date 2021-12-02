@@ -90,7 +90,7 @@ public class ObjectPool : MonoBehaviour
             case "HealPack":
                 targetPool = healPack;
                 break;
-            case "SpeedUp":
+            case "ShootUp":
                 targetPool = speedUp_Item;
                 break;
         }

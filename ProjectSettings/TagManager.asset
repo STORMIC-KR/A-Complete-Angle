@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - HealPack
   - RoomWall
+  - AttackWing
   layers:
   - Default
   - TransparentFX

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4805856810930162463}
   - component: {fileID: 4805856810930162462}
   m_Layer: 10
-  m_Name: PowerUp_Item
+  m_Name: ShootUp_Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,11 +94,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4805856810930162458}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71c79de4e5914574fae2f8d8f42195bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 82d187daeb836d34986e07ddd6e2e807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  increasement: 10
-  postProcessProfile: {fileID: 11400000, guid: d476204ca79fa7e4bb48b04e45c2e63c, type: 2}
+  shootUpEffect: {fileID: 751029183651457994, guid: 5e763f94f20e76b4c96e4b824d20e97b, type: 3}
 --- !u!58 &4805856810930162463
 CircleCollider2D:
   m_ObjectHideFlags: 0
