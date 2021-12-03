@@ -779,7 +779,7 @@ Animator:
   m_GameObject: {fileID: 577737766}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6838e301fd428874e9bf86d7cb1e0238, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9afbcb0e0ce5c4041af57c47bb9d7da7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -3065,6 +3065,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0934933249f99b46bcf9bf0ef417043, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 577737768}
   shotPoint: {fileID: 1499862260}
   timeBtwShots: 0.2
   shootSound: {fileID: 0}

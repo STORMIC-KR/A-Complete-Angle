@@ -16,7 +16,7 @@ public class HealPack : MonoBehaviour
     
     void Update()
     {
-        Invoke("DestroyItem", 2f);
+        Invoke("DestroyItem", 5f);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

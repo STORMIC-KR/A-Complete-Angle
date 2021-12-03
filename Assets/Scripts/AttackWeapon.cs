@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AttackWeapon : MonoBehaviour
 {
+    public Animator anim;
+
     public Transform shotPoint;
     public float timeBtwShots;
     private float shotTime;
@@ -36,6 +38,7 @@ public class AttackWeapon : MonoBehaviour
         {
             if (Time.time >= shotTime)
             {
+                anim.Play("Attack");
                 shootSound.Play();
                 GameObject bullet = objectPool.MakeObject("Bullet");
                 bullet.transform.position = shotPoint.position;

@@ -95,7 +95,7 @@ public class Enemy : MonoBehaviour
             Instantiate(deathEffect, transform.position, Quaternion.identity);
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
 
-            if(ran < 4)
+            if(ran < 5)
             {
                 Debug.Log("No Item");
             }
