@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ShootUp_Item : ItemTest
 {
-    //public int increasement;
     public GameObject shootUpEffect;
 
     public override void RunItem()
@@ -14,8 +13,8 @@ public class ShootUp_Item : ItemTest
         AttackWeapon attackWeapon = attackWingObj.GetComponent<AttackWeapon>();
         attackWeapon.timeBtwShots /= 2;
         Instantiate(shootUpEffect, transform.position, Quaternion.identity);
-        DestoryObject();
         Invoke("ResetItemEffect", 5f);
+        DestoryObject();
         #endregion
 
         #region speedup
@@ -49,9 +48,9 @@ public class ShootUp_Item : ItemTest
         //Destroy(gameObject);
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Player"))
+        if(other.CompareTag("Player"))
         {
             RunItem();
         }

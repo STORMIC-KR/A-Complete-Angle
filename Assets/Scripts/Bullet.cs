@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         targetPlayer = GameObject.Find("Player").transform;
+        Invoke("DestroyBullet", lifeTime);
     }
     
     void Update()

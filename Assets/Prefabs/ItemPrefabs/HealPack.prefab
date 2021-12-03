@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 5580782876494661829}
   - component: {fileID: 5580782876494661830}
   - component: {fileID: 5580782876494661831}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: HealPack
   m_TagString: HealPack
   m_Icon: {fileID: 0}
@@ -200,8 +200,8 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
+  m_Interpolate: 2
+  m_SleepingMode: 0
   m_CollisionDetection: 0
   m_Constraints: 0
 --- !u!58 &5580782876494661831

@@ -13,6 +13,11 @@ public class HealPack : MonoBehaviour
     {
         objectPool = FindObjectOfType<ObjectPool>();
     }
+    
+    void Update()
+    {
+        Invoke("DestroyItem", 2f);
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -25,7 +30,7 @@ public class HealPack : MonoBehaviour
                 player.cur_playerHealth += healValue;
                 Instantiate(healEffect, transform.position, Quaternion.identity);
                 Debug.Log("Eat HP!");
-                gameObject.SetActive(false);
+                DestroyItem();
 
                 if(player.cur_playerHealth >= player.max_playerHealth)
                 {
@@ -37,5 +42,10 @@ public class HealPack : MonoBehaviour
                 return;
             }
         }
+    }
+
+    void DestroyItem()
+    {
+        gameObject.SetActive(false);
     }
 }
