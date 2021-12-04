@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public GameObject helpText;
+    public GameObject helpPanel;
 
     Color helpTextColor;
 
@@ -40,11 +41,24 @@ public class GameManager : MonoBehaviour
         {
             if(SceneManager.GetActiveScene().buildIndex == 0)
             {
-                Application.Quit();
+                if(helpPanel.activeSelf == false)
+                {
+                    Application.Quit();
+                }
+            }
+
+            if(helpPanel.activeSelf == true)
+            {
+                helpPanel.SetActive(false);
             }
         }
 
         HelpText();
+    }
+
+    public void HelpPanelOn()
+    {
+        helpPanel.SetActive(true);
     }
 
     public void HelpText()
