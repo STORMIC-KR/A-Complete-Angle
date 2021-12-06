@@ -311,7 +311,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 605928158}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: CtrlHelpPanel
+        m_MethodName: HelpPanelOn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

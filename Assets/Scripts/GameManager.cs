@@ -11,8 +11,6 @@ public class GameManager : MonoBehaviour
 
     Color helpTextColor;
 
-
-    #region InGame
     public void StartGame()
     {
         SceneManager.LoadScene("Game");
@@ -28,12 +26,8 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene("Title");
     }
-    #endregion
-    
     void Start()
     {
-        Screen.SetResolution(2048, 1536, true);
-
         if(helpText != null)
         {
             helpText.SetActive(false);
@@ -43,57 +37,42 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        QuitGame();
-
-        if(Input.GetKeyDown(KeyCode.F1))
+        if(Input.GetKeyDown(KeyCode.Escape))
         {
-            CtrlHelpPanel();
-        }
-
-        if(SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            if(helpText != null)
+            if(SceneManager.GetActiveScene().buildIndex == 0)
             {
-                if(Input.GetKeyDown(KeyCode.F1))
+                if(helpPanel.activeSelf == false)
                 {
-                    HelpText();
+                    Application.Quit();
                 }
             }
-        }
-    }
 
-    public void QuitGame()
-    {
-        if(SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            if(Input.GetKeyDown(KeyCode.Escape))
+            if(helpPanel.activeSelf == true)
             {
-                Application.Quit();
+                helpPanel.SetActive(false);
             }
         }
+
+        HelpText();
     }
 
-    public void CtrlHelpPanel()
+    public void HelpPanelOn()
     {
-        if(helpPanel.activeSelf == true)
-        {
-            helpPanel.SetActive(false);
-        }
-        else
-        {
-            helpPanel.SetActive(true);
-        }
+        helpPanel.SetActive(true);
     }
 
     public void HelpText()
     {
-        if(helpText.activeSelf == true)
+        if(Input.GetKeyDown(KeyCode.F1))
         {
-            helpText.SetActive(false);
-        }
-        else
-        {
-            helpText.SetActive(true);
+            if(helpText.activeSelf == true)
+            {
+                helpText.SetActive(false);
+            }
+            else
+            {
+                helpText.SetActive(true);
+            }
         }
     }
 }
