@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealPack : MonoBehaviour
+public class Heal_Item : Item
 {
     public int healValue;
 
@@ -21,15 +21,19 @@ public class HealPack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Player player = other.GetComponent<Player>();
-
         if(other.CompareTag("Player"))
         {
-            if(player.cur_playerHealth < player.max_playerHealth)
+            RunItem();
+        }
+    }
+
+    public override void RunItem()
+    {
+        Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        if(player.cur_playerHealth < player.max_playerHealth)
             {
                 player.cur_playerHealth += healValue;
                 Instantiate(healEffect, transform.position, Quaternion.identity);
-                Debug.Log("Eat HP!");
                 DestroyItem();
 
                 if(player.cur_playerHealth >= player.max_playerHealth)
@@ -41,8 +45,9 @@ public class HealPack : MonoBehaviour
             {
                 return;
             }
-        }
     }
+
+    public override void ResetItemEffect(){}
 
     void DestroyItem()
     {

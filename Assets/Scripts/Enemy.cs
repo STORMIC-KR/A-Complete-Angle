@@ -97,7 +97,7 @@ public class Enemy : MonoBehaviour
 
             if(ran < 5)
             {
-                Debug.Log("No Item");
+                return;
             }
             else if(ran < 7)
             {
@@ -111,7 +111,6 @@ public class Enemy : MonoBehaviour
             }
             gameObject.SetActive(false);
             player.killEnemyCount++;
-            Debug.Log("Enemy Down!");
             Invoke("Restore", 0.1f);
         }
     }

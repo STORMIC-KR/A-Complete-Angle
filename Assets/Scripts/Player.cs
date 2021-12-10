@@ -76,9 +76,6 @@ public class Player : MonoBehaviour
             wing.GetChild(1).gameObject.GetComponent<SpriteRenderer>().enabled = true;
             wing.GetChild(1).gameObject.GetComponent<DefenseWeapon>().enabled = true;
             wing.GetChild(1).gameObject.GetComponent<BoxCollider2D>().enabled = true;
-
-            // wing.GetChild(0).gameObject.SetActive(false);
-            // wing.GetChild(1).gameObject.SetActive(true);
         }
         else //방패 꺼짐
         {
@@ -88,9 +85,6 @@ public class Player : MonoBehaviour
             wing.GetChild(1).gameObject.GetComponent<SpriteRenderer>().enabled = false;
             wing.GetChild(1).gameObject.GetComponent<DefenseWeapon>().enabled = false;
             wing.GetChild(1).gameObject.GetComponent<BoxCollider2D>().enabled = false;
-
-            // wing.GetChild(0).gameObject.SetActive(true);
-            // wing.GetChild(1).gameObject.SetActive(false);
         }
     }
 
@@ -112,7 +106,6 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         gameOverPanel.SetActive(true);
         Time.timeScale = 0;
-        Debug.Log("Game Over");
     }
 
     IEnumerator AlphaBlink()

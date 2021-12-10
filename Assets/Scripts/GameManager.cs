@@ -11,23 +11,10 @@ public class GameManager : MonoBehaviour
 
     Color helpTextColor;
 
-    public void StartGame()
-    {
-        SceneManager.LoadScene("Game");
-    }
-
-    public void ReStartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Time.timeScale = 1f;
-    }
-
-    public void Menu()
-    {
-        SceneManager.LoadScene("Title");
-    }
     void Start()
     {
+        Screen.SetResolution(2048, 1536, true);
+
         if(helpText != null)
         {
             helpText.SetActive(false);
@@ -53,25 +40,70 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if(Input.GetKeyDown(KeyCode.F1))
+        {
+            if(SceneManager.GetActiveScene().buildIndex == 0)
+            {
+                CtrlHelpPanel();
+            }
+        }
+
+        StartGame();
+
         HelpText();
     }
 
-    public void HelpPanelOn()
+    public void StartGame()
     {
-        helpPanel.SetActive(true);
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if(SceneManager.GetActiveScene().buildIndex == 0)
+            {
+                SceneManager.LoadScene("Game");
+            }
+        }
+    }
+
+    public void ReStartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
+    }
+
+    public void Menu()
+    {
+        SceneManager.LoadScene("Title");
+    }
+
+    public void CtrlHelpPanel()
+    {
+        if(helpPanel.activeSelf == false)
+        {
+            helpPanel.SetActive(true);
+        }
+        else
+        {
+            helpPanel.SetActive(false);
+        }
     }
 
     public void HelpText()
     {
         if(Input.GetKeyDown(KeyCode.F1))
         {
-            if(helpText.activeSelf == true)
+            if(helpText != null)
             {
-                helpText.SetActive(false);
-            }
-            else
-            {
-                helpText.SetActive(true);
+                if(SceneManager.GetActiveScene().buildIndex != 0)
+                {
+                    if(helpText.activeSelf == true)
+                    {
+                        helpText.SetActive(false);
+                    }
+                    else
+                    {
+                        helpText.SetActive(true);
+                    }
+                }
             }
         }
     }

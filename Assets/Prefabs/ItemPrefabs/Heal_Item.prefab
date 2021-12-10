@@ -91,12 +91,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5580782876494661828}
-  - component: {fileID: 5580782876494661833}
+  - component: {fileID: 7342492052938170487}
   - component: {fileID: 5580782876494661829}
   - component: {fileID: 5580782876494661830}
   - component: {fileID: 5580782876494661831}
   m_Layer: 10
-  m_Name: HealPack
+  m_Name: Heal_Item
   m_TagString: HealPack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -117,7 +117,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5580782876494661833
+--- !u!114 &7342492052938170487
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -126,7 +126,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5580782876494661826}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d74fc499cfe6e94fa6917f9a9ef90dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 23b75cb2bc6673f4aa91174133af775a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   healValue: 5

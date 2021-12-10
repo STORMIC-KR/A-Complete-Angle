@@ -8,13 +8,7 @@ public class Ability : ScriptableObject
     public float coolDownTime;
     public float activeTime;
 
-    public virtual void Activate(GameObject parent)
-    {
+    public virtual void Activate(GameObject parent){}
 
-    }
-
-    public virtual void BeginCoolDown(GameObject parent)
-    {
-        
-    }
+    public virtual void BeginCoolDown(GameObject parent){}
 }

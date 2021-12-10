@@ -49,6 +49,5 @@ public class Bullet : MonoBehaviour
     void DestroyBullet()
     {
         gameObject.SetActive(false);
-        Debug.Log("Bullet Destroyed");
     }
 }

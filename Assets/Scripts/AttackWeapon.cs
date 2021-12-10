@@ -24,11 +24,6 @@ public class AttackWeapon : MonoBehaviour
         Attack();
     }
 
-    private void FixedUpdate()
-    {
-
-    }
-
     void Attack()
     {
         Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
