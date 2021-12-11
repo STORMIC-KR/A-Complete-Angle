@@ -13,11 +13,6 @@ public class Heal_Item : Item
     {
         objectPool = FindObjectOfType<ObjectPool>();
     }
-    
-    void Update()
-    {
-        Invoke("DestroyItem", 5f);
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -34,7 +29,7 @@ public class Heal_Item : Item
             {
                 player.cur_playerHealth += healValue;
                 Instantiate(healEffect, transform.position, Quaternion.identity);
-                DestroyItem();
+                gameObject.SetActive(false);
 
                 if(player.cur_playerHealth >= player.max_playerHealth)
                 {
@@ -48,9 +43,4 @@ public class Heal_Item : Item
     }
 
     public override void ResetItemEffect(){}
-
-    void DestroyItem()
-    {
-        gameObject.SetActive(false);
-    }
 }

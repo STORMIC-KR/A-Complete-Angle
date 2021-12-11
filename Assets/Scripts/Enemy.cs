@@ -48,7 +48,7 @@ public class Enemy : MonoBehaviour
         rb.rotation = angle;
         direction.Normalize();
         movement = direction;
-        
+
         SearchAndShot();
     }
 
@@ -93,25 +93,27 @@ public class Enemy : MonoBehaviour
             int ran = Random.Range(0,10);
 
             Instantiate(deathEffect, transform.position, Quaternion.identity);
+            Invoke("Restore", 0.2f);
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
 
             if(ran < 5)
             {
+                gameObject.SetActive(false);
                 return;
             }
             else if(ran < 7)
             {
+                gameObject.SetActive(false);
                 GameObject healPack = objectPool.MakeObject("HealPack");
                 healPack.transform.position = transform.position;
             }
             else if(ran < 9)
             {
+                gameObject.SetActive(false);
                 GameObject speedUp = objectPool.MakeObject("ShootUp");
                 speedUp.transform.position = transform.position;
             }
-            gameObject.SetActive(false);
             player.killEnemyCount++;
-            Invoke("Restore", 0.1f);
         }
     }
 
