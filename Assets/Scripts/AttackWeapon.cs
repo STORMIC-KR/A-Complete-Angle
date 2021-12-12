@@ -33,7 +33,7 @@ public class AttackWeapon : MonoBehaviour
         {
             if (Time.time >= shotTime)
             {
-                anim.Play("Attack");
+                anim.Play("Player_Attack");
                 shootSound.Play();
                 GameObject bullet = objectPool.MakeObject("Bullet");
                 bullet.transform.position = shotPoint.position;

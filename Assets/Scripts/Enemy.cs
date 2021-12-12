@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     public GameObject deathEffect;
     public ObjectPool objectPool;
     Rigidbody2D rb;
+    Animator anim;
     Vector2 movement;
     public int enemyHealth;
     int maxEnemyHealth;
@@ -34,6 +35,7 @@ public class Enemy : MonoBehaviour
         targetPlayer = GameObject.Find("Player").transform;
         shotSound = GetComponent<AudioSource>();
         sr = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
 
         objectPool = FindObjectOfType<ObjectPool>();
 
@@ -71,6 +73,7 @@ public class Enemy : MonoBehaviour
         {
             if (Time.time >= shotTime)
             {
+                anim.Play("Enemy_Attack");
                 shotSound.Play();
                 GameObject bulletObj = objectPool.MakeObject("EnemyBullet");
                 bulletObj.transform.position = shotPoint.position;

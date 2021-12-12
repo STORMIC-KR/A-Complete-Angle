@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class ShootUp_Item : Item
 {
@@ -15,7 +16,7 @@ public class ShootUp_Item : Item
         Instantiate(shootUpEffect, transform.position, Quaternion.identity);
         Invoke("ResetItemEffect", 5f);
         DestoryObject();
-        #endregion    
+        #endregion
     }
 
     public override void ResetItemEffect()
