@@ -22,10 +22,10 @@ public class ObjectPool : MonoBehaviour
 
     void Awake()
     {
-        bullet = new GameObject[50];
+        bullet = new GameObject[25];
         enemy_Bullet = new GameObject[50];
-        normal_Enemy = new GameObject[50];
-        tanker_Enemy = new GameObject[50];
+        normal_Enemy = new GameObject[10];
+        tanker_Enemy = new GameObject[10];
         healPack = new GameObject[50];
         speedUp_Item = new GameObject[50];
 
@@ -95,7 +95,7 @@ public class ObjectPool : MonoBehaviour
                 break;
         }
 
-        for(int index = 0; index < targetPool.Length; index++)
+        for(int index = 0; index <= targetPool.Length; index++)
         {
             if(!targetPool[index].activeSelf)
             {

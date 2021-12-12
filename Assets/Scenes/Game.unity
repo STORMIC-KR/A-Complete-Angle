@@ -446,10 +446,11 @@ MonoBehaviour:
   - 
   - 
   objectPool: {fileID: 2079994827}
+  player: {fileID: 0}
   waveText: {fileID: 1411613808}
   waveNum: 0
   spawnRate: 5
-  timeBtwWaves: 5
+  timeBtwWaves: 1
   spawningEnemyCount: 0
 --- !u!4 &302888250
 Transform:

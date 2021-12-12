@@ -11,9 +11,10 @@ public class WaveSpawnSystem : MonoBehaviour
 
     public string[] enemies;
     public ObjectPool objectPool;
+    public GameObject player;
 
     public Text waveText;
-    public int waveNum = 0;
+    public int waveNum = 1;
 
     public float spawnRate = 1.0f;
     public float timeBtwWaves = 3.0f;
@@ -25,6 +26,7 @@ public class WaveSpawnSystem : MonoBehaviour
     void Awake()
     {
         enemies = new string[] { "NEnemy", "TEnemy" };
+        player = GameObject.FindGameObjectWithTag("Player");
     }
     
     void Update()
@@ -42,17 +44,22 @@ public class WaveSpawnSystem : MonoBehaviour
 
         for(int i = 0; i < spawningEnemyCount; i++)
         {
+            
             int ranEnemy = Random.Range(0, enemies.Length);
             float ranX_pos = Random.Range(minX, maxX);
             float ranY_pos = Random.Range(minY, maxY);
-            
+
             Vector2 spawnPosition = new Vector2(ranX_pos, ranY_pos);
+            Vector2 playerPosition = new Vector2(player.transform.position.x, player.transform.position.y);
 
-            GameObject enemy = objectPool.MakeObject(enemies[ranEnemy]);
-            enemy.transform.position = spawnPosition;
-            enemy.transform.rotation = Quaternion.identity;
+            if(spawnPosition != playerPosition)
+            {
+                GameObject enemy = objectPool.MakeObject(enemies[ranEnemy]);
+                enemy.transform.position = spawnPosition;
+                enemy.transform.rotation = Quaternion.identity;
 
-            yield return new WaitForSeconds(spawnRate);
+                yield return new WaitForSeconds(spawnRate);
+            }
         }
 
         waveNum += 1;

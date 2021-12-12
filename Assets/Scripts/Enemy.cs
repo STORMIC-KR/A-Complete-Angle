@@ -81,10 +81,10 @@ public class Enemy : MonoBehaviour
                 shotTime = Time.time + timeBtwShots;
             }
         }
-        if(Vector3.Distance(targetPlayer.position, transform.position) >= attackRange * 7)
-        {
-            gameObject.SetActive(false);
-        }
+        // if(Vector3.Distance(targetPlayer.position, transform.position) >= attackRange * 7)
+        // {
+        //     gameObject.SetActive(false);
+        // }
     }
 
     void TakeDamage(int damage)
@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour
         if(enemyHealth <= 0)
         {
             int ran = Random.Range(0,10);
-
+            player.killEnemyCount++;
             Instantiate(deathEffect, transform.position, Quaternion.identity);
             Invoke("Restore", 0.2f);
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
@@ -116,7 +116,6 @@ public class Enemy : MonoBehaviour
                 GameObject speedUp = objectPool.MakeObject("ShootUp");
                 speedUp.transform.position = transform.position;
             }
-            player.killEnemyCount++;
         }
     }
 
