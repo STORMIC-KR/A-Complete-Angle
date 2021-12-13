@@ -5,10 +5,19 @@ using UnityEngine.Tilemaps;
 
 public class ShootUp_Item : Item
 {
+    public Tilemap roomWall;
     public GameObject shootUpEffect;
+
+    void Start()
+    {
+        roomWall = GameObject.FindObjectOfType<Tilemap>();
+    }
 
     public override void RunItem()
     {
+        roomWall.gameObject.GetComponent<Tilemap>().color = new Color(1f, 0.3f, 1f);
+        Color shootColor = new Color(1f, 0.3f, 1f);
+
         #region shootup
         GameObject attackWingObj = GameObject.FindGameObjectWithTag("AttackWing");
         AttackWeapon attackWeapon = attackWingObj.GetComponent<AttackWeapon>();
@@ -21,6 +30,8 @@ public class ShootUp_Item : Item
 
     public override void ResetItemEffect()
     {
+        roomWall.gameObject.GetComponent<Tilemap>().color = Color.white;
+
         #region shootup
         GameObject attackWingObj = GameObject.FindGameObjectWithTag("AttackWing");
         AttackWeapon attackWeapon = attackWingObj.GetComponent<AttackWeapon>();
