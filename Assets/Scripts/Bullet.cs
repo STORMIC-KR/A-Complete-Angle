@@ -4,14 +4,12 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private Transform targetPlayer;
     public float speed;
     public float lifeTime;
     public int damage;
     
     void Start()
     {
-        targetPlayer = GameObject.Find("Player").transform;
         Invoke("DestroyBullet", lifeTime);
     }
     

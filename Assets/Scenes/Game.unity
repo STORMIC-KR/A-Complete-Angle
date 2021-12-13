@@ -707,7 +707,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 11
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
@@ -1889,7 +1889,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 500}
+  m_AnchoredPosition: {x: 0, y: 444}
   m_SizeDelta: {x: 700, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &796376585
@@ -2815,7 +2815,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -100, y: 350}
+  m_AnchoredPosition: {x: -100, y: 294}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1411613808
@@ -3266,9 +3266,8 @@ MonoBehaviour:
   normalAcceleration: 5
   acceleration: 0
   movementInput: {x: 0, y: 0}
-  cur_playerHealth: 10
-  max_playerHealth: 10
-  damage: 1
+  cur_playerHealth: 100
+  max_playerHealth: 100
   killEnemyCount: 0
   killCountText: {fileID: 1886637198}
   wing: {fileID: 577737767}
@@ -3517,7 +3516,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: 350}
+  m_AnchoredPosition: {x: 100, y: 294}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1886637198
@@ -3869,8 +3868,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet_Prefab: {fileID: 7390241416388671185, guid: 4495e86f75522fb4e952ad8e1a3a0859, type: 3}
-  enemy_Bullet_Prefab: {fileID: 7390241416388671185, guid: 39f4b041c99b8394facf476cb5783665, type: 3}
+  n_enemy_Bullet_Prefab: {fileID: 7390241416388671185, guid: 39f4b041c99b8394facf476cb5783665, type: 3}
+  g_enemy_Bullet_Prefab: {fileID: 7390241416388671185, guid: 3038637f567072b4bb64387fae7d0e96, type: 3}
   normal_Enemy_Prefab: {fileID: 2683980823373561223, guid: f5d14f8415ab92848ace65ae6506f103, type: 3}
   tanker_Enemy_Prefab: {fileID: 1114736989960834571, guid: 3fb5191634fc7324b855e73995abb1ed, type: 3}
   healPack_Prefab: {fileID: 5580782876494661826, guid: 4d4813dee94ddae44a93ffea67e95232, type: 3}
   speedUp_Prefab: {fileID: 4805856810930162458, guid: 4c45e81b8e5ff774a873ee7940c8d044, type: 3}
+  bulletNum: 30
+  n_BulletNum: 30
+  g_BulletNum: 30
+  n_EnemyNum: 10
+  g_EnemyNum: 10
+  healPackNum: 30
+  speedPackNum: 30

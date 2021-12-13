@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
     [Header("Enemy Basic")]
     [SerializeField] private Player player;
     [SerializeField] private Transform targetPlayer;
+    public enum Type { Normal, Giant };
+    public Type enemyType;
     SpriteRenderer sr;
     public GameObject deathEffect;
     public ObjectPool objectPool;
@@ -19,7 +21,6 @@ public class Enemy : MonoBehaviour
     public float attackRange;
 
     [Header("Shot")]
-    public GameObject bullet;
     public AudioSource shotSound;
     public Transform shotPoint;
     public float timeBtwShots;
@@ -31,6 +32,7 @@ public class Enemy : MonoBehaviour
 
     void Start()
     {
+        maxEnemyHealth = enemyHealth;
         player = FindObjectOfType<Player>();
         targetPlayer = GameObject.Find("Player").transform;
         shotSound = GetComponent<AudioSource>();
@@ -40,23 +42,23 @@ public class Enemy : MonoBehaviour
         objectPool = FindObjectOfType<ObjectPool>();
 
         rb = this.GetComponent<Rigidbody2D>();
-        maxEnemyHealth = enemyHealth;
     }
 
     void Update()
     {
-        Vector3 direction = targetPlayer.position - transform.position;
+        Vector2 direction = targetPlayer.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         rb.rotation = angle;
         direction.Normalize();
         movement = direction;
-
-        SearchAndShot();
     }
 
     private void FixedUpdate()
     {
         MoveCharacter(movement);
+
+        SearchAndShot();
+        Dead();
     }
 
     void MoveCharacter(Vector2 direction)
@@ -75,44 +77,55 @@ public class Enemy : MonoBehaviour
             {
                 anim.Play("Enemy_Attack");
                 shotSound.Play();
-                GameObject bulletObj = objectPool.MakeObject("EnemyBullet");
-                bulletObj.transform.position = shotPoint.position;
-                bulletObj.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-                shotTime = Time.time + timeBtwShots;
+                GameObject bulletObj;
+                switch(enemyType)
+                {
+                    case Type.Normal:
+                        bulletObj = objectPool.MakeObject("N_EnemyBullet");
+                        bulletObj.transform.position = shotPoint.position;
+                        bulletObj.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+                        shotTime = Time.time + timeBtwShots;
+                        break;
+                    case Type.Giant:
+                        bulletObj = objectPool.MakeObject("G_EnemyBullet");
+                        bulletObj.transform.position = shotPoint.position;
+                        bulletObj.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+                        shotTime = Time.time + timeBtwShots;
+                        break;
+                }
             }
         }
-        // if(Vector3.Distance(targetPlayer.position, transform.position) >= attackRange * 7)
-        // {
-        //     gameObject.SetActive(false);
-        // }
     }
 
     void TakeDamage(int damage)
     {
         enemyHealth -= damage;
         StartCoroutine("alphaBlink");
+    }
+
+    void Dead()
+    {
         if(enemyHealth <= 0)
         {
-            int ran = Random.Range(0,10);
+            gameObject.SetActive(false);
+            
+            int itemRandomNum = Random.Range(0,10);
             player.killEnemyCount++;
             Instantiate(deathEffect, transform.position, Quaternion.identity);
             Invoke("Restore", 0.2f);
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
 
-            if(ran < 5)
+            if(itemRandomNum < 5)
             {
-                gameObject.SetActive(false);
                 return;
             }
-            else if(ran < 7)
+            else if(itemRandomNum < 7)
             {
-                gameObject.SetActive(false);
                 GameObject healPack = objectPool.MakeObject("HealPack");
                 healPack.transform.position = transform.position;
             }
-            else if(ran < 9)
+            else if(itemRandomNum < 9)
             {
-                gameObject.SetActive(false);
                 GameObject speedUp = objectPool.MakeObject("ShootUp");
                 speedUp.transform.position = transform.position;
             }
@@ -135,7 +148,8 @@ public class Enemy : MonoBehaviour
     {
         if (other.CompareTag("Bullet"))
         {
-            TakeDamage(player.damage);
+            int damage = other.gameObject.GetComponent<Bullet>().damage;
+            TakeDamage(damage);
         }
     }
 }

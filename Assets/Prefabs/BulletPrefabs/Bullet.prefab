@@ -135,6 +135,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPlayer: {fileID: 0}
-  speed: 15
+  speed: 10
   lifeTime: 2
-  damage: 5
+  damage: 10

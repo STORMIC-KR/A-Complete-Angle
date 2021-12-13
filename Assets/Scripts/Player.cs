@@ -17,8 +17,6 @@ public class Player : MonoBehaviour
     public int cur_playerHealth = 10;
     public int max_playerHealth = 10;
 
-    public int damage;
-
     public int killEnemyCount = 0;
     public Text killCountText;
 
@@ -133,7 +131,8 @@ public class Player : MonoBehaviour
     {
         if(other.CompareTag("Enemy_Bullet"))
         {
-            TakeDamage(1);
+            int damage = other.gameObject.GetComponent<Bullet>().damage;
+            TakeDamage(damage);
         }
     }
 }

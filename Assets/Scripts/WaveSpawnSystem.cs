@@ -56,7 +56,6 @@ public class WaveSpawnSystem : MonoBehaviour
             {
                 GameObject enemy = objectPool.MakeObject(enemies[ranEnemy]);
                 enemy.transform.position = spawnPosition;
-                enemy.transform.rotation = Quaternion.identity;
 
                 yield return new WaitForSeconds(spawnRate);
             }

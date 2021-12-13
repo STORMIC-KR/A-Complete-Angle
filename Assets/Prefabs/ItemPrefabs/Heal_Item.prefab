@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b75cb2bc6673f4aa91174133af775a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healValue: 5
+  healValue: 20
   objectPool: {fileID: 0}
   healEffect: {fileID: 751029183651457994, guid: 89ede21cbaaf33044aa9f4fd41530e79, type: 3}
 --- !u!212 &5580782876494661829

@@ -5,14 +5,16 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     public GameObject bullet_Prefab;
-    public GameObject enemy_Bullet_Prefab;
+    public GameObject n_enemy_Bullet_Prefab;
+    public GameObject g_enemy_Bullet_Prefab;
     public GameObject normal_Enemy_Prefab;
     public GameObject tanker_Enemy_Prefab;
     public GameObject healPack_Prefab;
     public GameObject speedUp_Prefab;
 
     GameObject[] bullet;
-    GameObject[] enemy_Bullet;
+    GameObject[] n_enemy_Bullet;
+    GameObject[] g_enemy_Bullet;
     GameObject[] normal_Enemy;
     GameObject[] tanker_Enemy;
     GameObject[] healPack;
@@ -20,14 +22,23 @@ public class ObjectPool : MonoBehaviour
 
     GameObject[] targetPool;
 
+    public int bulletNum;
+    public int n_BulletNum;
+    public int g_BulletNum;
+    public int n_EnemyNum;
+    public int g_EnemyNum;
+    public int healPackNum;
+    public int speedPackNum;
+
     void Awake()
     {
-        bullet = new GameObject[25];
-        enemy_Bullet = new GameObject[50];
-        normal_Enemy = new GameObject[10];
-        tanker_Enemy = new GameObject[10];
-        healPack = new GameObject[50];
-        speedUp_Item = new GameObject[50];
+        bullet = new GameObject[bulletNum];
+        n_enemy_Bullet = new GameObject[n_BulletNum];
+        g_enemy_Bullet = new GameObject[g_BulletNum];
+        normal_Enemy = new GameObject[n_EnemyNum];
+        tanker_Enemy = new GameObject[g_EnemyNum];
+        healPack = new GameObject[healPackNum];
+        speedUp_Item = new GameObject[speedPackNum];
 
         Generate();
     }
@@ -40,10 +51,16 @@ public class ObjectPool : MonoBehaviour
             bullet[index].SetActive(false);
         }
 
-        for(int index = 0; index < enemy_Bullet.Length; index++)
+        for(int index = 0; index < n_enemy_Bullet.Length; index++)
         {
-            enemy_Bullet[index] = Instantiate(enemy_Bullet_Prefab);
-            enemy_Bullet[index].SetActive(false);
+            n_enemy_Bullet[index] = Instantiate(n_enemy_Bullet_Prefab);
+            n_enemy_Bullet[index].SetActive(false);
+        }
+
+        for(int index = 0; index < g_enemy_Bullet.Length; index++)
+        {
+            g_enemy_Bullet[index] = Instantiate(g_enemy_Bullet_Prefab);
+            g_enemy_Bullet[index].SetActive(false);
         }
         
         for(int index = 0; index < normal_Enemy.Length; index++)
@@ -78,8 +95,11 @@ public class ObjectPool : MonoBehaviour
             case "Bullet":
                 targetPool = bullet;
                 break;
-            case "EnemyBullet":
-                targetPool = enemy_Bullet;
+            case "N_EnemyBullet":
+                targetPool = n_enemy_Bullet;
+                break;
+            case "G_EnemyBullet":
+                targetPool = g_enemy_Bullet;
                 break;
             case "NEnemy":
                 targetPool = normal_Enemy;
@@ -95,7 +115,7 @@ public class ObjectPool : MonoBehaviour
                 break;
         }
 
-        for(int index = 0; index <= targetPool.Length; index++)
+        for(int index = 0; index < targetPool.Length; index++)
         {
             if(!targetPool[index].activeSelf)
             {
