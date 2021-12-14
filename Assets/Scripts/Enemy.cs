@@ -112,7 +112,7 @@ public class Enemy : MonoBehaviour
             int itemRandomNum = Random.Range(0,10);
             player.killEnemyCount++;
             Instantiate(deathEffect, transform.position, Quaternion.identity);
-            Invoke("Restore", 0.2f);
+            Invoke("Restore", 0.1f);
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
 
             if(itemRandomNum < 5)

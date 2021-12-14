@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
@@ -28,6 +29,8 @@ public class Player : MonoBehaviour
     public Animator mapAnimator;
     public GameObject deathEffect;
 
+    public Tilemap roomWall;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,6 +40,8 @@ public class Player : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         gameOverPanel.SetActive(false);
+
+        roomWall = GameObject.FindObjectOfType<Tilemap>();
     }
 
     void Update()
@@ -55,6 +60,22 @@ public class Player : MonoBehaviour
         healthBar.value = (float)cur_playerHealth / (float)max_playerHealth;
 
         killCountText.text = "Kill \n" + killEnemyCount;
+
+        if(cur_playerHealth <= 0)
+        {
+            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
+            StartCoroutine(GameOver());
+        }
+
+        if(cur_playerHealth <= 50)
+        {
+            roomWall.gameObject.GetComponent<Tilemap>().color = Color.red;
+        }
+        else if(cur_playerHealth > 50)
+        {
+            roomWall.gameObject.GetComponent<Tilemap>().color = Color.white;
+        }
 
         WeaponSwap();
     }
@@ -90,13 +111,6 @@ public class Player : MonoBehaviour
     {
         cur_playerHealth -= damage;
         StartCoroutine("AlphaBlink");
-
-        if(cur_playerHealth <= 0)
-        {
-            sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
-            Instantiate(deathEffect, transform.position, Quaternion.identity);
-            StartCoroutine(GameOver());
-        }
     }
 
     IEnumerator GameOver()

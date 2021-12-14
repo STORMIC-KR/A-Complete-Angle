@@ -3969,10 +3969,10 @@ MonoBehaviour:
   tanker_Enemy_Prefab: {fileID: 1114736989960834571, guid: 3fb5191634fc7324b855e73995abb1ed, type: 3}
   healPack_Prefab: {fileID: 5580782876494661826, guid: 4d4813dee94ddae44a93ffea67e95232, type: 3}
   speedUp_Prefab: {fileID: 4805856810930162458, guid: 4c45e81b8e5ff774a873ee7940c8d044, type: 3}
-  bulletNum: 30
-  n_BulletNum: 30
-  g_BulletNum: 30
-  n_EnemyNum: 10
-  g_EnemyNum: 10
+  bulletNum: 40
+  n_BulletNum: 25
+  g_BulletNum: 25
+  n_EnemyNum: 15
+  g_EnemyNum: 15
   healPackNum: 30
   speedPackNum: 30
