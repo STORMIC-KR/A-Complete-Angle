@@ -20,13 +20,14 @@ public class WaveSpawnSystem : MonoBehaviour
     public float timeBtwWaves = 3.0f;
 
     public int spawningEnemyCount;
-    bool waveIsDone = true;
+    bool waveIsDone = false;
 
 
     void Awake()
     {
         enemies = new string[] { "NEnemy", "TEnemy" };
         player = GameObject.FindGameObjectWithTag("Player");
+        Invoke("TurnWaveON", 3f);
     }
     
     void Update()
@@ -36,6 +37,11 @@ public class WaveSpawnSystem : MonoBehaviour
         {
             StartCoroutine(WaveSpawn());
         }
+    }
+
+    void TurnWaveON()
+    {
+        waveIsDone = true;
     }
 
     IEnumerator WaveSpawn()

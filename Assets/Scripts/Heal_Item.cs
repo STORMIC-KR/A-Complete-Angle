@@ -34,7 +34,7 @@ public class Heal_Item : Item
                 player.cur_playerHealth += healValue;
                 Instantiate(healEffect, transform.position, Quaternion.identity);
                 gameObject.SetActive(false);
-                Invoke("ResetItemEffect", 1f);
+                Invoke("ResetItemEffect", 3f);
 
                 if(player.cur_playerHealth >= player.max_playerHealth)
                 {
