@@ -497,6 +497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   helpText: {fileID: 0}
   helpPanel: {fileID: 1713223644}
+  crossHairImg: {fileID: 2800000, guid: 0723e2f91538ccf4498e329ec3b2307d, type: 3}
 --- !u!1 &717311579
 GameObject:
   m_ObjectHideFlags: 0

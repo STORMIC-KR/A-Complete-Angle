@@ -29,8 +29,6 @@ public class Player : MonoBehaviour
     public Animator mapAnimator;
     public GameObject deathEffect;
 
-    public Tilemap roomWall;
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -40,8 +38,6 @@ public class Player : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         gameOverPanel.SetActive(false);
-
-        roomWall = GameObject.FindObjectOfType<Tilemap>();
     }
 
     void Update()
@@ -50,8 +46,6 @@ public class Player : MonoBehaviour
         float directionY = Input.GetAxisRaw("Vertical");
 
         movementInput = new Vector2(directionX, directionY).normalized;
-
-
 
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
@@ -66,15 +60,6 @@ public class Player : MonoBehaviour
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
             Instantiate(deathEffect, transform.position, Quaternion.identity);
             StartCoroutine(GameOver());
-        }
-
-        if(cur_playerHealth <= 50)
-        {
-            roomWall.gameObject.GetComponent<Tilemap>().color = Color.red;
-        }
-        else if(cur_playerHealth > 50)
-        {
-            roomWall.gameObject.GetComponent<Tilemap>().color = Color.white;
         }
 
         WeaponSwap();

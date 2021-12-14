@@ -26,17 +26,20 @@ public class GameManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
-            if(SceneManager.GetActiveScene().buildIndex == 0)
+            if(helpPanel != null)
             {
-                if(helpPanel.activeSelf == false)
+                if(SceneManager.GetActiveScene().buildIndex == 0)
                 {
-                    Application.Quit();
+                    if(helpPanel.activeSelf == false)
+                    {
+                        Application.Quit();
+                    }
                 }
-            }
 
-            if(helpPanel.activeSelf == true)
-            {
-                helpPanel.SetActive(false);
+                if(helpPanel.activeSelf == true)
+                {
+                    helpPanel.SetActive(false);
+                }
             }
         }
 
@@ -48,12 +51,12 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        StartGame();
+        StartGameWithKey();
 
         HelpText();
     }
 
-    public void StartGame()
+    public void StartGameWithKey()
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -61,6 +64,14 @@ public class GameManager : MonoBehaviour
             {
                 SceneManager.LoadScene("Game");
             }
+        }
+    }
+
+    public void StartGame()
+    {
+        if(SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            SceneManager.LoadScene("Game");
         }
     }
 
@@ -77,13 +88,16 @@ public class GameManager : MonoBehaviour
 
     public void CtrlHelpPanel()
     {
-        if(helpPanel.activeSelf == false)
+        if(helpPanel != null)
         {
-            helpPanel.SetActive(true);
-        }
-        else
-        {
-            helpPanel.SetActive(false);
+            if(helpPanel.activeSelf == false)
+            {
+                helpPanel.SetActive(true);
+            }
+            else
+            {
+                helpPanel.SetActive(false);
+            }
         }
     }
 
