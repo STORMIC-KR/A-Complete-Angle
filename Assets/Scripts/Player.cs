@@ -23,11 +23,13 @@ public class Player : MonoBehaviour
 
 
     public Transform wing;
+    public GameObject attackWing;
 
     public Slider healthBar;
     public GameObject gameOverPanel;
     public Animator mapAnimator;
     public GameObject deathEffect;
+    public GameManager gameManager;
 
     void Start()
     {
@@ -36,6 +38,7 @@ public class Player : MonoBehaviour
 
         healthBar.value = (float)cur_playerHealth / (float)max_playerHealth;
         sr = GetComponent<SpriteRenderer>();
+        gameManager = FindObjectOfType<GameManager>();
 
         gameOverPanel.SetActive(false);
     }
@@ -47,9 +50,16 @@ public class Player : MonoBehaviour
 
         movementInput = new Vector2(directionX, directionY).normalized;
 
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        wing.up = (mousePos - (Vector2)transform.position).normalized;
+        if(gameManager.deviceType == "DeskTop")
+        {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            wing.up = (mousePos - (Vector2)transform.position).normalized;
+        }
+        else if(gameManager.deviceType == "Handheld")
+        {
+            Vector2 mousePos = attackWing.GetComponent<AttackWeapon>().FindClosestEnemy().transform.position;
+            wing.up = (mousePos - (Vector2)transform.position).normalized;
+        }
 
         healthBar.value = (float)cur_playerHealth / (float)max_playerHealth;
 

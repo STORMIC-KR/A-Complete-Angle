@@ -11,9 +11,31 @@ public class GameManager : MonoBehaviour
 
     Color helpTextColor;
 
+    public string deviceType;
+
     void Start()
     {
         Screen.SetResolution(2048, 1536, true);
+        if(SystemInfo.deviceType == DeviceType.Desktop)
+        {
+            deviceType = "DeskTop";
+        }
+
+        switch(SystemInfo.deviceType)
+        {
+            case DeviceType.Desktop:
+                deviceType = "DeskTop";
+                break;
+            case DeviceType.Console:
+                deviceType = "Console";
+                break;
+            case DeviceType.Handheld:
+                deviceType = "Handheld";
+                break;
+            case DeviceType.Unknown:
+                deviceType = "Unknown";
+                break;
+        }
 
         if(helpText != null)
         {
@@ -71,7 +93,14 @@ public class GameManager : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().buildIndex == 0)
         {
-            SceneManager.LoadScene("Game");
+            if(deviceType == "DeskTop")
+            {
+                SceneManager.LoadScene("Game");
+            }
+            else if(deviceType == "HandHeld")
+            {
+                SceneManager.LoadScene("");
+            }
         }
     }
 

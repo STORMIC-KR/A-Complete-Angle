@@ -9,6 +9,7 @@ public class AbilityHolder : MonoBehaviour
 
     float coolDownTime;
     float activeTime;
+    public GameManager gameManager;
 
     enum AbilityState
     {
@@ -17,17 +18,29 @@ public class AbilityHolder : MonoBehaviour
         cooldown
     }
     AbilityState state = AbilityState.ready;
+    
+    void Start()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
 
     void Update()
     {
         switch(state)
         {
             case AbilityState.ready:
-                if(Input.GetKeyDown(KeyCode.Space))
+                if(gameManager.deviceType == "DeskTop")
                 {
-                    ability1.Activate(gameObject);
-                    state = AbilityState.active;
-                    activeTime = ability1.activeTime;
+                    if(Input.GetKeyDown(KeyCode.Space))
+                    {
+                        ability1.Activate(gameObject);
+                        state = AbilityState.active;
+                        activeTime = ability1.activeTime;
+                    }
+                }
+                else if(gameManager.deviceType == "Handheld")
+                {
+                    
                 }
             break;
             case AbilityState.active:

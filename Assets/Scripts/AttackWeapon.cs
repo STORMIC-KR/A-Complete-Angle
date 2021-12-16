@@ -10,35 +10,80 @@ public class AttackWeapon : MonoBehaviour
     public float timeBtwShots;
     private float shotTime;
 
+    public GameObject FindClosestEnemy()
+    {
+        GameObject[] enemies;
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject closest = null;
+        float distance = Mathf.Infinity;
+        Vector3 position = transform.position;
+        foreach(GameObject enemy in enemies)
+        {
+            Vector3 diff = enemy.transform.position - position;
+            float curDistance = diff.sqrMagnitude;
+            if(curDistance < distance)
+            {
+                closest = enemy;
+                distance = curDistance;
+            }
+        }
+        return closest;
+    }
+
     public AudioSource shootSound;
 
     public ObjectPool objectPool;
+    public GameManager gameManager;
 
     void Start() 
     {
         shootSound = GetComponent<AudioSource>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Attack();
     }
 
     void Attack()
     {
-        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-
-        if (Input.GetMouseButton(0))
+        if(gameManager.deviceType == "DeskTop")
         {
-            if (Time.time >= shotTime)
+            Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            if (Input.GetMouseButton(0))
             {
-                anim.Play("Player_Attack");
-                shootSound.Play();
-                GameObject bullet = objectPool.MakeObject("Bullet");
-                bullet.transform.position = shotPoint.position;
-                bullet.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-                shotTime = Time.time + timeBtwShots;
+                if (Time.time >= shotTime)
+                {
+                    anim.Play("Player_Attack");
+                    shootSound.Play();
+                    GameObject bullet = objectPool.MakeObject("Bullet");
+                    bullet.transform.position = shotPoint.position;
+                    bullet.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+                    shotTime = Time.time + timeBtwShots;
+                }
+            }
+        }
+        else if(gameManager.deviceType == "HandHeld")
+        {
+            if(FindClosestEnemy() != null)
+            {
+                Vector2 direction = FindClosestEnemy().transform.position - transform.position;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                if (Input.GetMouseButton(0))
+                {
+                    if (Time.time >= shotTime)
+                    {
+                        anim.Play("Player_Attack");
+                        shootSound.Play();
+                        GameObject bullet = objectPool.MakeObject("Bullet");
+                        bullet.transform.position = shotPoint.position;
+                        bullet.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+                        shotTime = Time.time + timeBtwShots;
+                    }
+                }
             }
         }
     }
