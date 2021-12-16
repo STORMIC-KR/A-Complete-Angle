@@ -41,7 +41,7 @@ public class AttackWeapon : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         Attack();
     }
@@ -66,24 +66,22 @@ public class AttackWeapon : MonoBehaviour
                 }
             }
         }
-        else if(SystemInfo.deviceType == DeviceType.Handheld)
+    }
+
+    public void Mobile_Attack()
+    {
+        if(SystemInfo.deviceType == DeviceType.Handheld)
         {
-            if(FindClosestEnemy() != null)
+            Vector2 direction = FindClosestEnemy().transform.position - transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            if (Time.time >= shotTime)
             {
-                Vector2 direction = FindClosestEnemy().transform.position - transform.position;
-                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-                if (Input.GetMouseButton(0))
-                {
-                    if (Time.time >= shotTime)
-                    {
-                        anim.Play("Player_Attack");
-                        shootSound.Play();
-                        GameObject bullet = objectPool.MakeObject("Bullet");
-                        bullet.transform.position = shotPoint.position;
-                        bullet.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-                        shotTime = Time.time + timeBtwShots;
-                    }
-                }
+                anim.Play("Player_Attack");
+                shootSound.Play();
+                GameObject bullet = objectPool.MakeObject("Bullet");
+                bullet.transform.position = shotPoint.position;
+                bullet.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+                shotTime = Time.time + timeBtwShots;
             }
         }
     }

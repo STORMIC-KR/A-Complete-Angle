@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject helpText;
     public GameObject helpPanel;
     public Text deviceText;
-    public GameObject joystick;
+    public GameObject mobileController;
 
     Color helpTextColor;
 
@@ -79,11 +79,11 @@ public class GameManager : MonoBehaviour
         {
             if(SystemInfo.deviceType == DeviceType.Desktop)
             {
-                joystick.SetActive(false);
+                mobileController.SetActive(false);
             }
             else if(SystemInfo.deviceType == DeviceType.Handheld)
             {
-                joystick.SetActive(true);
+                mobileController.SetActive(true);
             }
         }
 

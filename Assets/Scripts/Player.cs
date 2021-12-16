@@ -12,9 +12,8 @@ public class Player : MonoBehaviour
     public float normalAcceleration;
     [HideInInspector] public float acceleration;
     [HideInInspector] public Vector2 movementInput;
-    public JoystickValue value;
 
-
+    public VariableJoystick variableJoystick;
 
     public int cur_playerHealth = 10;
     public int max_playerHealth = 10;
@@ -58,9 +57,11 @@ public class Player : MonoBehaviour
         }
         else if(SystemInfo.deviceType == DeviceType.Handheld)
         {
-            float directionX = value.joyTouch.x;
-            float directionY = value.joyTouch.y;
-            movementInput = new Vector2(directionX, directionY).normalized;
+            crossHair.SetActive(false);
+
+            float directionX = variableJoystick.Horizontal;
+            float directionY = variableJoystick.Vertical;
+            movementInput = new Vector2(variableJoystick.Horizontal, variableJoystick.Vertical).normalized;
             
             Vector2 mousePos = attackWing.GetComponent<AttackWeapon>().FindClosestEnemy().transform.position;
             wing.up = (mousePos - (Vector2)transform.position).normalized;
@@ -87,23 +88,26 @@ public class Player : MonoBehaviour
 
     public void WeaponSwap()
     {
-        if (Input.GetMouseButton(1)) //방패 켜짐 (0번은 공격, 1번은 방어)
+        if(SystemInfo.deviceType == DeviceType.Desktop)
         {
-            wing.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            wing.GetChild(0).gameObject.GetComponent<AttackWeapon>().enabled = false;
+            if (Input.GetMouseButton(1)) //방패 켜짐 (0번은 공격, 1번은 방어)
+            {
+                wing.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                wing.GetChild(0).gameObject.GetComponent<AttackWeapon>().enabled = false;
 
-            wing.GetChild(1).gameObject.GetComponent<SpriteRenderer>().enabled = true;
-            wing.GetChild(1).gameObject.GetComponent<DefenseWeapon>().enabled = true;
-            wing.GetChild(1).gameObject.GetComponent<BoxCollider2D>().enabled = true;
-        }
-        else //방패 꺼짐
-        {
-            wing.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = true;
-            wing.GetChild(0).gameObject.GetComponent<AttackWeapon>().enabled = true;
+                wing.GetChild(1).gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                wing.GetChild(1).gameObject.GetComponent<DefenseWeapon>().enabled = true;
+                wing.GetChild(1).gameObject.GetComponent<BoxCollider2D>().enabled = true;
+            }
+            else //방패 꺼짐
+            {
+                wing.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = true;
+                wing.GetChild(0).gameObject.GetComponent<AttackWeapon>().enabled = true;
 
-            wing.GetChild(1).gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            wing.GetChild(1).gameObject.GetComponent<DefenseWeapon>().enabled = false;
-            wing.GetChild(1).gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                wing.GetChild(1).gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                wing.GetChild(1).gameObject.GetComponent<DefenseWeapon>().enabled = false;
+                wing.GetChild(1).gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            }
         }
     }
 
