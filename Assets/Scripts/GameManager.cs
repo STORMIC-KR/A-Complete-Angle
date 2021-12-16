@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public GameObject helpText;
     public GameObject helpPanel;
+    public Text deviceText;
+    public GameObject joystick;
 
     Color helpTextColor;
 
@@ -16,24 +18,24 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Screen.SetResolution(2048, 1536, true);
-        if(SystemInfo.deviceType == DeviceType.Desktop)
-        {
-            deviceType = "DeskTop";
-        }
 
         switch(SystemInfo.deviceType)
         {
             case DeviceType.Desktop:
                 deviceType = "DeskTop";
+                deviceText.text = "Your Device Type : " + deviceType;
                 break;
             case DeviceType.Console:
                 deviceType = "Console";
+                deviceText.text = "Your Device Type : " + deviceType;
                 break;
             case DeviceType.Handheld:
                 deviceType = "Handheld";
+                deviceText.text = "Your Device Type : " + deviceType;
                 break;
             case DeviceType.Unknown:
                 deviceType = "Unknown";
+                deviceText.text = "Your Device Type : " + deviceType;
                 break;
         }
 
@@ -72,6 +74,18 @@ public class GameManager : MonoBehaviour
                 CtrlHelpPanel();
             }
         }
+        
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            if(SystemInfo.deviceType == DeviceType.Desktop)
+            {
+                joystick.SetActive(false);
+            }
+            else if(SystemInfo.deviceType == DeviceType.Handheld)
+            {
+                joystick.SetActive(true);
+            }
+        }
 
         StartGameWithKey();
 
@@ -93,14 +107,7 @@ public class GameManager : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().buildIndex == 0)
         {
-            if(deviceType == "DeskTop")
-            {
-                SceneManager.LoadScene("Game");
-            }
-            else if(deviceType == "HandHeld")
-            {
-                SceneManager.LoadScene("");
-            }
+            SceneManager.LoadScene("Game");
         }
     }
 

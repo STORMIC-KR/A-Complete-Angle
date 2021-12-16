@@ -48,7 +48,7 @@ public class AttackWeapon : MonoBehaviour
 
     void Attack()
     {
-        if(gameManager.deviceType == "DeskTop")
+        if(SystemInfo.deviceType == DeviceType.Desktop)
         {
             Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -66,7 +66,7 @@ public class AttackWeapon : MonoBehaviour
                 }
             }
         }
-        else if(gameManager.deviceType == "HandHeld")
+        else if(SystemInfo.deviceType == DeviceType.Handheld)
         {
             if(FindClosestEnemy() != null)
             {

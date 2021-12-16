@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public float normalAcceleration;
     [HideInInspector] public float acceleration;
     [HideInInspector] public Vector2 movementInput;
+    public JoystickValue value;
 
 
 
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
     public Animator mapAnimator;
     public GameObject deathEffect;
     public GameManager gameManager;
+    public GameObject crossHair;
 
     void Start()
     {
@@ -45,18 +47,21 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        float directionX = Input.GetAxisRaw("Horizontal");
-        float directionY = Input.GetAxisRaw("Vertical");
-
-        movementInput = new Vector2(directionX, directionY).normalized;
-
-        if(gameManager.deviceType == "DeskTop")
+        if(SystemInfo.deviceType == DeviceType.Desktop)
         {
+            float directionX = Input.GetAxisRaw("Horizontal");
+            float directionY = Input.GetAxisRaw("Vertical");
+            movementInput = new Vector2(directionX, directionY).normalized;
+            
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             wing.up = (mousePos - (Vector2)transform.position).normalized;
         }
-        else if(gameManager.deviceType == "Handheld")
+        else if(SystemInfo.deviceType == DeviceType.Handheld)
         {
+            float directionX = value.joyTouch.x;
+            float directionY = value.joyTouch.y;
+            movementInput = new Vector2(directionX, directionY).normalized;
+            
             Vector2 mousePos = attackWing.GetComponent<AttackWeapon>().FindClosestEnemy().transform.position;
             wing.up = (mousePos - (Vector2)transform.position).normalized;
         }
@@ -105,13 +110,16 @@ public class Player : MonoBehaviour
     void TakeDamage(int damage)
     {
         cur_playerHealth -= damage;
-        StartCoroutine("AlphaBlink");
+        StartCoroutine(AlphaBlink());
     }
 
     IEnumerator GameOver()
     {
         yield return new WaitForSeconds(0.2f);
         gameOverPanel.SetActive(true);
+        Cursor.visible = true;
+        crossHair.SetActive(false);
+
         Time.timeScale = 0;
     }
 
