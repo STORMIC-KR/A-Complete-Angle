@@ -55,17 +55,19 @@ public class Player : MonoBehaviour
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             wing.up = (mousePos - (Vector2)transform.position).normalized;
         }
-        else if(SystemInfo.deviceType == DeviceType.Handheld)
-        {
-            crossHair.SetActive(false);
+        
+        // else if(SystemInfo.deviceType == DeviceType.Handheld)
+        // {
+        //     crossHair.SetActive(false);
 
-            float directionX = variableJoystick.Horizontal;
-            float directionY = variableJoystick.Vertical;
-            movementInput = new Vector2(variableJoystick.Horizontal, variableJoystick.Vertical).normalized;
+        //     float directionX = variableJoystick.Horizontal;
+        //     float directionY = variableJoystick.Vertical;
+        //     movementInput = new Vector2(variableJoystick.Horizontal, variableJoystick.Vertical).normalized;
             
-            Vector2 mousePos = attackWing.GetComponent<AttackWeapon>().FindClosestEnemy().transform.position;
-            wing.up = (mousePos - (Vector2)transform.position).normalized;
-        }
+        //     Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //     //Vector2 mousePos = attackWing.GetComponent<AttackWeapon>().FindClosestEnemy().transform.position;
+        //     wing.up = (mousePos - (Vector2)transform.position).normalized;
+        // }
 
         healthBar.value = (float)cur_playerHealth / (float)max_playerHealth;
 

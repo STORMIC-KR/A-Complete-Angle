@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject helpText;
     public GameObject helpPanel;
     public Text deviceText;
     public GameObject mobileController;
@@ -37,13 +36,6 @@ public class GameManager : MonoBehaviour
                 deviceType = "Unknown";
                 deviceText.text = "Your Device Type : " + deviceType;
                 break;
-        }
-
-        if(helpText != null)
-        {
-            helpText.SetActive(false);
-            helpTextColor = helpText.GetComponent<Text>().color;
-            helpTextColor = new Color(1,1,1,1);
         }
     }
     void Update()
@@ -88,8 +80,6 @@ public class GameManager : MonoBehaviour
         }
 
         StartGameWithKey();
-
-        HelpText();
     }
 
     public void StartGameWithKey()
@@ -133,27 +123,6 @@ public class GameManager : MonoBehaviour
             else
             {
                 helpPanel.SetActive(false);
-            }
-        }
-    }
-
-    public void HelpText()
-    {
-        if(Input.GetKeyDown(KeyCode.F1))
-        {
-            if(helpText != null)
-            {
-                if(SceneManager.GetActiveScene().buildIndex != 0)
-                {
-                    if(helpText.activeSelf == true)
-                    {
-                        helpText.SetActive(false);
-                    }
-                    else
-                    {
-                        helpText.SetActive(true);
-                    }
-                }
             }
         }
     }
