@@ -22,20 +22,21 @@ public class GameManager : MonoBehaviour
         {
             case DeviceType.Desktop:
                 deviceType = "DeskTop";
-                deviceText.text = "Your Device Type : " + deviceType;
                 break;
             case DeviceType.Console:
                 deviceType = "Console";
-                deviceText.text = "Your Device Type : " + deviceType;
                 break;
             case DeviceType.Handheld:
                 deviceType = "Handheld";
-                deviceText.text = "Your Device Type : " + deviceType;
                 break;
             case DeviceType.Unknown:
                 deviceType = "Unknown";
-                deviceText.text = "Your Device Type : " + deviceType;
                 break;
+        }
+
+        if(deviceText != null)
+        {
+            deviceText.text = "Your Device Type : " + deviceType;
         }
     }
     void Update()

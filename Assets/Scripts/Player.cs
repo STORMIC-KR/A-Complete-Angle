@@ -32,6 +32,9 @@ public class Player : MonoBehaviour
     public GameManager gameManager;
     public GameObject crossHair;
 
+    public AudioSource shootItemSound;
+    public AudioSource healPackSound;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -55,7 +58,7 @@ public class Player : MonoBehaviour
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             wing.up = (mousePos - (Vector2)transform.position).normalized;
         }
-        
+
         // else if(SystemInfo.deviceType == DeviceType.Handheld)
         // {
         //     crossHair.SetActive(false);
@@ -156,6 +159,18 @@ public class Player : MonoBehaviour
         {
             int damage = other.gameObject.GetComponent<Bullet>().damage;
             TakeDamage(damage);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if(other.CompareTag("ShootUp"))
+        {
+            shootItemSound.Play();
+        }
+        else if(other.CompareTag("HealPack"))
+        {
+            healPackSound.Play();
         }
     }
 }

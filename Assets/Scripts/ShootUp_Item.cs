@@ -13,6 +13,14 @@ public class ShootUp_Item : Item
         roomWall = GameObject.FindObjectOfType<Tilemap>();
     }
 
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if(other.CompareTag("Player"))
+        {
+            RunItem();
+        }
+    }
+
     public override void RunItem()
     {
         roomWall.gameObject.GetComponent<Tilemap>().color = new Color(1f, 0.3f, 1f);
@@ -42,13 +50,5 @@ public class ShootUp_Item : Item
     public void DestoryObject()
     {
         gameObject.SetActive(false);
-    }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if(other.CompareTag("Player"))
-        {
-            RunItem();
-        }
     }
 }

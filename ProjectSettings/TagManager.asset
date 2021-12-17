@@ -11,6 +11,7 @@ TagManager:
   - HealPack
   - RoomWall
   - AttackWing
+  - ShootUp
   layers:
   - Default
   - TransparentFX
