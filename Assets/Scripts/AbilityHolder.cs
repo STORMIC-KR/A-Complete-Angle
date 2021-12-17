@@ -10,6 +10,7 @@ public class AbilityHolder : MonoBehaviour
     float coolDownTime;
     float activeTime;
     public GameManager gameManager;
+    public AudioSource dashSound;
 
     enum AbilityState
     {
@@ -36,6 +37,7 @@ public class AbilityHolder : MonoBehaviour
                         ability1.Activate(gameObject);
                         state = AbilityState.active;
                         activeTime = ability1.activeTime;
+                        dashSound.Play();
                     }
                 }
                 else if(gameManager.deviceType == "Handheld")
