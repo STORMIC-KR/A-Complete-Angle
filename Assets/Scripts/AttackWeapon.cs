@@ -10,30 +10,30 @@ public class AttackWeapon : MonoBehaviour
     public float timeBtwShots;
     private float shotTime;
 
-    public GameObject FindClosestEnemy()
-    {
-        GameObject[] enemies;
-        enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        GameObject closest = null;
-        float distance = Mathf.Infinity;
-        Vector3 position = transform.position;
-        foreach(GameObject enemy in enemies)
-        {
-            Vector3 diff = enemy.transform.position - position;
-            float curDistance = diff.sqrMagnitude;
-            if(curDistance < distance)
-            {
-                closest = enemy;
-                distance = curDistance;
-            }
-        }
-        return closest;
-    }
-
     public AudioSource shootSound;
 
     public ObjectPool objectPool;
     public GameManager gameManager;
+
+    // public GameObject FindClosestEnemy()
+    // {
+    //     GameObject[] enemies;
+    //     enemies = GameObject.FindGameObjectsWithTag("Enemy");
+    //     GameObject closest = null;
+    //     float distance = Mathf.Infinity;
+    //     Vector3 position = transform.position;
+    //     foreach(GameObject enemy in enemies)
+    //     {
+    //         Vector3 diff = enemy.transform.position - position;
+    //         float curDistance = diff.sqrMagnitude;
+    //         if(curDistance < distance)
+    //         {
+    //             closest = enemy;
+    //             distance = curDistance;
+    //         }
+    //     }
+    //     return closest;
+    // }
 
     void Start() 
     {
@@ -68,21 +68,21 @@ public class AttackWeapon : MonoBehaviour
         }
     }
 
-    public void Mobile_Attack()
-    {
-        if(SystemInfo.deviceType == DeviceType.Handheld)
-        {
-            Vector2 direction = FindClosestEnemy().transform.position - transform.position;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            if (Time.time >= shotTime)
-            {
-                anim.Play("Player_Attack");
-                shootSound.Play();
-                GameObject bullet = objectPool.MakeObject("Bullet");
-                bullet.transform.position = shotPoint.position;
-                bullet.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-                shotTime = Time.time + timeBtwShots;
-            }
-        }
-    }
+    // public void Mobile_Attack()
+    // {
+    //     if(SystemInfo.deviceType == DeviceType.Handheld)
+    //     {
+    //         Vector2 direction = FindClosestEnemy().transform.position - transform.position;
+    //         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+    //         if (Time.time >= shotTime)
+    //         {
+    //             anim.Play("Player_Attack");
+    //             shootSound.Play();
+    //             GameObject bullet = objectPool.MakeObject("Bullet");
+    //             bullet.transform.position = shotPoint.position;
+    //             bullet.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+    //             shotTime = Time.time + timeBtwShots;
+    //         }
+    //     }
+    // }
 }

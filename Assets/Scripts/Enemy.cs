@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [Header("Enemy Basic")]
+    [Header("Enemy Basic Movement")]
     [SerializeField] private Player player;
-    [SerializeField] private Transform targetPlayer;
     public enum Type { Normal, Giant };
     public Type enemyType;
     SpriteRenderer sr;
@@ -15,6 +14,8 @@ public class Enemy : MonoBehaviour
     Rigidbody2D rb;
     Animator anim;
     Vector2 movement;
+
+    [Header("Enemy Stats")]
     public int enemyHealth;
     int maxEnemyHealth;
     public float speed;
@@ -22,6 +23,7 @@ public class Enemy : MonoBehaviour
 
     [Header("Shot")]
     public AudioSource shotSound;
+    [SerializeField] private Transform targetPlayer;
     public Transform shotPoint;
     public float timeBtwShots;
     float shotTime;

@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class AbilityHolder : MonoBehaviour
 {
-    public Ability ability1;
-
+    public Ability dashAbility;
     float coolDownTime;
     float activeTime;
     public GameManager gameManager;
@@ -30,19 +29,12 @@ public class AbilityHolder : MonoBehaviour
         switch(state)
         {
             case AbilityState.ready:
-                if(gameManager.deviceType == "DeskTop")
+                if(Input.GetKeyDown(KeyCode.LeftShift))
                 {
-                    if(Input.GetKeyDown(KeyCode.Space))
-                    {
-                        ability1.Activate(gameObject);
-                        state = AbilityState.active;
-                        activeTime = ability1.activeTime;
-                        dashSound.Play();
-                    }
-                }
-                else if(gameManager.deviceType == "Handheld")
-                {
-                    
+                    dashAbility.Activate(gameObject);
+                    state = AbilityState.active;
+                    activeTime = dashAbility.activeTime;
+                    dashSound.Play();
                 }
             break;
             case AbilityState.active:
@@ -52,9 +44,9 @@ public class AbilityHolder : MonoBehaviour
                 }
                 else
                 {
-                    ability1.BeginCoolDown(gameObject);
+                    dashAbility.BeginCoolDown(gameObject);
                     state = AbilityState.cooldown;
-                    coolDownTime = ability1.coolDownTime;
+                    coolDownTime = dashAbility.coolDownTime;
                 }
             break;
             case AbilityState.cooldown:

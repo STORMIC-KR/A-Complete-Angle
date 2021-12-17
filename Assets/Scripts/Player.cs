@@ -6,31 +6,30 @@ using UnityEngine.Tilemaps;
 
 public class Player : MonoBehaviour
 {
-    Rigidbody2D rb;
-    SpriteRenderer sr;
-
+    [Header("Basic Movement")]
     public float normalAcceleration;
     [HideInInspector] public float acceleration;
     [HideInInspector] public Vector2 movementInput;
+    Rigidbody2D rb;
+    SpriteRenderer sr;
 
-    public VariableJoystick variableJoystick;
-
+    [Header("Player Stats")]
     public int cur_playerHealth = 10;
     public int max_playerHealth = 10;
 
     public int killEnemyCount = 0;
     public Text killCountText;
 
-
+    [Header("Player Gadgets")]
     public Transform wing;
     public GameObject attackWing;
+    public GameObject gameOverPanel;
+    public GameObject deathEffect;
+    public GameObject crossHair;
 
     public Slider healthBar;
-    public GameObject gameOverPanel;
     public Animator mapAnimator;
-    public GameObject deathEffect;
     public GameManager gameManager;
-    public GameObject crossHair;
 
     public AudioSource shootItemSound;
     public AudioSource healPackSound;
@@ -59,19 +58,6 @@ public class Player : MonoBehaviour
             wing.up = (mousePos - (Vector2)transform.position).normalized;
         }
 
-        // else if(SystemInfo.deviceType == DeviceType.Handheld)
-        // {
-        //     crossHair.SetActive(false);
-
-        //     float directionX = variableJoystick.Horizontal;
-        //     float directionY = variableJoystick.Vertical;
-        //     movementInput = new Vector2(variableJoystick.Horizontal, variableJoystick.Vertical).normalized;
-            
-        //     Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //     //Vector2 mousePos = attackWing.GetComponent<AttackWeapon>().FindClosestEnemy().transform.position;
-        //     wing.up = (mousePos - (Vector2)transform.position).normalized;
-        // }
-
         healthBar.value = (float)cur_playerHealth / (float)max_playerHealth;
 
         killCountText.text = "Kill \n" + killEnemyCount;
@@ -81,6 +67,11 @@ public class Player : MonoBehaviour
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
             Instantiate(deathEffect, transform.position, Quaternion.identity);
             StartCoroutine(GameOver());
+        }
+
+        if(killEnemyCount == 10)
+        {
+            
         }
 
         WeaponSwap();
@@ -95,7 +86,7 @@ public class Player : MonoBehaviour
     {
         if(SystemInfo.deviceType == DeviceType.Desktop)
         {
-            if (Input.GetMouseButton(1)) //방패 켜짐 (0번은 공격, 1번은 방어)
+            if (Input.GetMouseButton(1))
             {
                 wing.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = false;
                 wing.GetChild(0).gameObject.GetComponent<AttackWeapon>().enabled = false;
@@ -104,7 +95,7 @@ public class Player : MonoBehaviour
                 wing.GetChild(1).gameObject.GetComponent<DefenseWeapon>().enabled = true;
                 wing.GetChild(1).gameObject.GetComponent<BoxCollider2D>().enabled = true;
             }
-            else //방패 꺼짐
+            else
             {
                 wing.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = true;
                 wing.GetChild(0).gameObject.GetComponent<AttackWeapon>().enabled = true;
@@ -139,20 +130,6 @@ public class Player : MonoBehaviour
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
     }
 
-    // void ZoomMinimap()
-    // {
-    //     if(Input.GetKey(KeyCode.C))
-    //     {
-    //         mapAnimator.SetFloat("speed", 1);
-    //         mapAnimator.Play("MinimapZoom");
-    //     }
-    //     if(Input.GetKeyUp(KeyCode.C))
-    //     {
-    //         mapAnimator.SetFloat("speed", -1);
-    //         mapAnimator.Play("MinimapZoom");
-    //     }
-    // }
-    
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Enemy_Bullet"))
