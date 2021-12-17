@@ -170,7 +170,14 @@ public class Player : MonoBehaviour
         }
         else if(other.CompareTag("HealPack"))
         {
-            healPackSound.Play();
+            if(cur_playerHealth >= max_playerHealth)
+            {
+                return;
+            }
+            else
+            {
+                healPackSound.Play();
+            }
         }
     }
 }
