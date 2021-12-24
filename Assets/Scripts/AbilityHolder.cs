@@ -29,7 +29,7 @@ public class AbilityHolder : MonoBehaviour
         switch(state)
         {
             case AbilityState.ready:
-                if(Input.GetKeyDown(KeyCode.LeftShift))
+                if(Input.GetKeyDown(KeyCode.Space))
                 {
                     dashAbility.Activate(gameObject);
                     state = AbilityState.active;

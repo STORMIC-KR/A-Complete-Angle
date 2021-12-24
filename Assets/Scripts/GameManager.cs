@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject helpPanel;
     public Text deviceText;
+    public Text versionText;
     public GameObject mobileController;
 
     Color helpTextColor;
@@ -81,6 +82,7 @@ public class GameManager : MonoBehaviour
         }
 
         StartGameWithKey();
+        versionText.text = "Version : " + Application.version;
     }
 
     public void StartGameWithKey()
