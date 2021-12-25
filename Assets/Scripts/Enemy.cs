@@ -5,22 +5,22 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("Enemy Basic Movement")]
-    [SerializeField] private Player player;
-    public enum Type { Normal, Giant };
-    public Type enemyType;
     SpriteRenderer sr;
-    public GameObject deathEffect;
-    public ObjectPool objectPool;
     Rigidbody2D rb;
     Animator anim;
     Vector2 movement;
+    [SerializeField] private Player player;
+    public enum Type { Normal, Giant };
+    public Type enemyType;
+    public GameObject deathEffect;
+    public ObjectPool objectPool;
 
     [Header("Enemy Stats")]
+    Enemy enemyScript;
     public int enemyHealth;
     int maxEnemyHealth;
     public float speed;
     public float attackRange;
-    Enemy enemyScript;
 
     [Header("Shot")]
     public AudioSource shotSound;
@@ -36,15 +36,13 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         maxEnemyHealth = enemyHealth;
-        player = FindObjectOfType<Player>();
         targetPlayer = GameObject.Find("Player").transform;
+        player = FindObjectOfType<Player>();
+        objectPool = FindObjectOfType<ObjectPool>();
         shotSound = GetComponent<AudioSource>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         enemyScript = GetComponent<Enemy>();
-
-        objectPool = FindObjectOfType<ObjectPool>();
-
         rb = this.GetComponent<Rigidbody2D>();
     }
 
@@ -52,24 +50,25 @@ public class Enemy : MonoBehaviour
     {
         Vector2 direction = targetPlayer.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
         rb.rotation = angle;
-        direction.Normalize();
         movement = direction;
 
-        if(player.cur_playerHealth <= 0)
-        {
-            enemyScript.enabled = false;
-        }
-        else if(player.cur_playerHealth > 0)
+        direction.Normalize();
+
+        if(player.cur_playerHealth > 0)
         {
             enemyScript.enabled = true;
+        }
+        else
+        {
+            enemyScript.enabled = false;
         }
     }
 
     private void FixedUpdate()
     {
         MoveCharacter(movement);
-
         SearchAndShot();
         Dead();
     }

@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class WaveSpawnSystem : MonoBehaviour
 {
     [SerializeField] private float spawnRadius = 5f;
-
     [SerializeField] private float maxX, minX, maxY, minY;
 
     public string[] enemies;
@@ -14,12 +13,13 @@ public class WaveSpawnSystem : MonoBehaviour
     public GameObject player;
 
     public Text waveText;
+    
     public int waveNum = 1;
+    public int spawningEnemyCount;
 
     public float spawnRate = 1.0f;
     public float timeBtwWaves = 3.0f;
 
-    public int spawningEnemyCount;
     bool waveIsDone = false;
 
 

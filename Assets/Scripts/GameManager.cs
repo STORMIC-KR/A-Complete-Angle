@@ -7,30 +7,21 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public GameObject helpPanel;
+    public GameObject mobileController;
+    public GameObject gameOverPanel;
+
     public Text deviceText;
     public Text versionText;
-    public GameObject mobileController;
-
-    Color helpTextColor;
-
-    public string deviceType;
-    public Player playerScript;
-    public WaveSpawnSystem waveScript;
-
-    public GameObject gameOverPanel;
     public Text endingKillText;
     public Text endingWaveText;
 
+    string deviceType;
+
+    public Player playerScript;
+    public WaveSpawnSystem waveScript;
+
     void Start()
     {
-        // if(playerScript != null)
-        // {
-        //     playerScript = FindObjectOfType<Player>().GetComponent<Player>();
-        // }
-        // if(waveScript != null)
-        // {
-        //     waveScript = FindObjectOfType<WaveSpawnSystem>().GetComponent<WaveSpawnSystem>();
-        // }
         Screen.SetResolution(2048, 1536, true);
 
         switch(SystemInfo.deviceType)

@@ -7,6 +7,7 @@ public class AttackWeapon : MonoBehaviour
     public Animator anim;
 
     public Transform shotPoint;
+
     public float timeBtwShots;
     private float shotTime;
 
@@ -57,9 +58,9 @@ public class AttackWeapon : MonoBehaviour
             {
                 if (Time.time >= shotTime)
                 {
+                    GameObject bullet = objectPool.MakeObject("Bullet");
                     anim.Play("Player_Attack");
                     shootSound.Play();
-                    GameObject bullet = objectPool.MakeObject("Bullet");
                     bullet.transform.position = shotPoint.position;
                     bullet.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
                     shotTime = Time.time + timeBtwShots;

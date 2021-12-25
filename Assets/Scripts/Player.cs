@@ -16,14 +16,15 @@ public class Player : MonoBehaviour
     [Header("Player Stats")]
     public int cur_playerHealth;
     public int max_playerHealth;
-
     public int killEnemyCount = 0;
+    
     public Text killCountText;
 
     Player playerScript;
 
     [Header("Player Gadgets")]
     public Transform wing;
+
     public GameObject attackWing;
     public GameObject deathEffect;
     public GameObject crossHair;
