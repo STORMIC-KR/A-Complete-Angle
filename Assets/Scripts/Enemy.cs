@@ -128,11 +128,11 @@ public class Enemy : MonoBehaviour
             Invoke("Restore", 0.1f);
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
 
-            if(itemRandomNum < 5)
+            if(itemRandomNum < 4)
             {
                 return;
             }
-            else if(itemRandomNum < 7)
+            else if(itemRandomNum < 8)
             {
                 GameObject healPack = objectPool.MakeObject("HealPack");
                 healPack.transform.position = transform.position;
