@@ -14,9 +14,21 @@ public class GameManager : MonoBehaviour
     Color helpTextColor;
 
     public string deviceType;
+    Player playerScript;
+    WaveSpawnSystem waveScript;
+
+    public GameObject gameOverPanel;
+    public Text endingKillText;
+    public Text endingWaveText;
 
     void Start()
     {
+        if(gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(false);
+        }
+        playerScript = FindObjectOfType<Player>().GetComponent<Player>();
+        waveScript = FindObjectOfType<WaveSpawnSystem>().GetComponent<WaveSpawnSystem>();
         Screen.SetResolution(2048, 1536, true);
 
         switch(SystemInfo.deviceType)
@@ -42,6 +54,8 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
+        endingKillText.text = "Kill : " + playerScript.killEnemyCount;
+        endingWaveText.text = "Wave : " + waveScript.waveNum;
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(helpPanel != null)
@@ -79,6 +93,11 @@ public class GameManager : MonoBehaviour
             {
                 mobileController.SetActive(true);
             }
+        }
+
+        if(playerScript.cur_playerHealth <= 0)
+        {
+            gameOverPanel.SetActive(true);
         }
 
         StartGameWithKey();

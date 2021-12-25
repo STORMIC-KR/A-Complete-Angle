@@ -25,7 +25,6 @@ public class Player : MonoBehaviour
     [Header("Player Gadgets")]
     public Transform wing;
     public GameObject attackWing;
-    public GameObject gameOverPanel;
     public GameObject deathEffect;
     public GameObject crossHair;
 
@@ -36,6 +35,7 @@ public class Player : MonoBehaviour
     public AudioSource shootItemSound;
     public AudioSource healPackSound;
     AttackWeapon attackWeaponScript;
+    WaveSpawnSystem waveScript;
 
     void Start()
     {
@@ -48,8 +48,7 @@ public class Player : MonoBehaviour
 
         playerScript = GetComponent<Player>();
         attackWeaponScript = FindObjectOfType<AttackWeapon>().GetComponent<AttackWeapon>();
-
-        gameOverPanel.SetActive(false);
+        waveScript = FindObjectOfType<WaveSpawnSystem>().GetComponent<WaveSpawnSystem>();
     }
 
     void Update()
@@ -78,6 +77,7 @@ public class Player : MonoBehaviour
         {
             playerScript.enabled = true;
             attackWeaponScript.enabled = true;
+            waveScript.enabled = true;
         }
 
         WeaponSwap();
@@ -122,11 +122,11 @@ public class Player : MonoBehaviour
     IEnumerator GameOver()
     {
         yield return new WaitForSeconds(0.2f);
-        gameOverPanel.SetActive(true);
         Cursor.visible = true;
         crossHair.SetActive(false);
         playerScript.enabled = false;
         attackWeaponScript.enabled = false;
+        waveScript.enabled = false;
 
         //Time.timeScale = 0;
     }
