@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
     Color helpTextColor;
 
     public string deviceType;
-    Player playerScript;
-    WaveSpawnSystem waveScript;
+    public Player playerScript;
+    public WaveSpawnSystem waveScript;
 
     public GameObject gameOverPanel;
     public Text endingKillText;
@@ -23,12 +23,14 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        if(gameOverPanel != null)
-        {
-            gameOverPanel.SetActive(false);
-        }
-        playerScript = FindObjectOfType<Player>().GetComponent<Player>();
-        waveScript = FindObjectOfType<WaveSpawnSystem>().GetComponent<WaveSpawnSystem>();
+        // if(playerScript != null)
+        // {
+        //     playerScript = FindObjectOfType<Player>().GetComponent<Player>();
+        // }
+        // if(waveScript != null)
+        // {
+        //     waveScript = FindObjectOfType<WaveSpawnSystem>().GetComponent<WaveSpawnSystem>();
+        // }
         Screen.SetResolution(2048, 1536, true);
 
         switch(SystemInfo.deviceType)
@@ -54,8 +56,6 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
-        endingKillText.text = "Kill : " + playerScript.killEnemyCount;
-        endingWaveText.text = "Wave : " + waveScript.waveNum;
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(helpPanel != null)
@@ -95,16 +95,19 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(playerScript.cur_playerHealth <= 0)
-        {
-            gameOverPanel.SetActive(true);
-        }
-
         StartGameWithKey();
         if(versionText != null)
         {
             versionText.text = "Version : " + Application.version;
         }
+
+        if(playerScript.cur_playerHealth <= 0)
+        {
+            gameOverPanel.SetActive(true);
+        }
+
+        endingKillText.text = "Kill : " + playerScript.killEnemyCount;        
+        endingWaveText.text = "Wave : " + waveScript.waveNum;
     }
 
     public void StartGameWithKey()

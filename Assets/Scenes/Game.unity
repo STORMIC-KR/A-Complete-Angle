@@ -2271,6 +2271,8 @@ MonoBehaviour:
   versionText: {fileID: 0}
   mobileController: {fileID: 1946212226}
   deviceType: 
+  playerScript: {fileID: 1607429118}
+  waveScript: {fileID: 302888249}
   gameOverPanel: {fileID: 93420063}
   endingKillText: {fileID: 5347749}
   endingWaveText: {fileID: 1326617248}
