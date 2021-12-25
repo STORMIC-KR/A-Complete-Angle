@@ -5,12 +5,29 @@ using UnityEngine.Tilemaps;
 
 public class ShootUp_Item : Item
 {
-    public Tilemap roomWall;
+    Tilemap roomWall;
     public GameObject shootUpEffect;
+
+    AttackWeapon attackWeapon;
+    GameObject attackWingObj;
 
     void Start()
     {
         roomWall = GameObject.FindObjectOfType<Tilemap>();
+        attackWingObj = GameObject.FindGameObjectWithTag("AttackWing");
+        attackWeapon = attackWingObj.GetComponent<AttackWeapon>();
+    }
+
+    void Update()
+    {
+        if(attackWeapon.timeBtwShots < 0.2)
+        {
+            roomWall.gameObject.GetComponent<Tilemap>().color = new Color(1f, 0.3f, 1f);
+        }
+        else
+        {
+            roomWall.gameObject.GetComponent<Tilemap>().color = Color.white;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D other)
@@ -23,13 +40,12 @@ public class ShootUp_Item : Item
 
     public override void RunItem()
     {
-        roomWall.gameObject.GetComponent<Tilemap>().color = new Color(1f, 0.3f, 1f);
-        Color shootColor = new Color(1f, 0.3f, 1f);
-
         #region shootup
-        GameObject attackWingObj = GameObject.FindGameObjectWithTag("AttackWing");
-        AttackWeapon attackWeapon = attackWingObj.GetComponent<AttackWeapon>();
         attackWeapon.timeBtwShots /= 2;
+        if(attackWeapon.timeBtwShots < 0.2f)
+        {
+            roomWall.gameObject.GetComponent<Tilemap>().color = new Color(1f, 0.3f, 1f);
+        }
         Instantiate(shootUpEffect, transform.position, Quaternion.identity);
         Invoke("ResetItemEffect", 5f);
         DestoryObject();
@@ -38,12 +54,14 @@ public class ShootUp_Item : Item
 
     public override void ResetItemEffect()
     {
-        roomWall.gameObject.GetComponent<Tilemap>().color = Color.white;
-
         #region shootup
         GameObject attackWingObj = GameObject.FindGameObjectWithTag("AttackWing");
         AttackWeapon attackWeapon = attackWingObj.GetComponent<AttackWeapon>();
         attackWeapon.timeBtwShots *= 2;
+        if(attackWeapon.timeBtwShots >= 0.2f)
+        {
+            roomWall.gameObject.GetComponent<Tilemap>().color = Color.white;
+        }
         #endregion
     }
 
