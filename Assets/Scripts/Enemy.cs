@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     int maxEnemyHealth;
     public float speed;
     public float attackRange;
+    Enemy enemyScript;
 
     [Header("Shot")]
     public AudioSource shotSound;
@@ -40,6 +41,7 @@ public class Enemy : MonoBehaviour
         shotSound = GetComponent<AudioSource>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        enemyScript = GetComponent<Enemy>();
 
         objectPool = FindObjectOfType<ObjectPool>();
 
@@ -53,6 +55,15 @@ public class Enemy : MonoBehaviour
         rb.rotation = angle;
         direction.Normalize();
         movement = direction;
+
+        if(player.cur_playerHealth <= 0)
+        {
+            enemyScript.enabled = false;
+        }
+        else if(player.cur_playerHealth > 0)
+        {
+            enemyScript.enabled = true;
+        }
     }
 
     private void FixedUpdate()

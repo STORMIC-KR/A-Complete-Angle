@@ -14,11 +14,13 @@ public class Player : MonoBehaviour
     SpriteRenderer sr;
 
     [Header("Player Stats")]
-    public int cur_playerHealth = 10;
-    public int max_playerHealth = 10;
+    public int cur_playerHealth;
+    public int max_playerHealth;
 
     public int killEnemyCount = 0;
     public Text killCountText;
+
+    Player playerScript;
 
     [Header("Player Gadgets")]
     public Transform wing;
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
 
     public AudioSource shootItemSound;
     public AudioSource healPackSound;
+    AttackWeapon attackWeaponScript;
 
     void Start()
     {
@@ -42,6 +45,9 @@ public class Player : MonoBehaviour
         healthBar.value = (float)cur_playerHealth / (float)max_playerHealth;
         sr = GetComponent<SpriteRenderer>();
         gameManager = FindObjectOfType<GameManager>();
+
+        playerScript = GetComponent<Player>();
+        attackWeaponScript = FindObjectOfType<AttackWeapon>().GetComponent<AttackWeapon>();
 
         gameOverPanel.SetActive(false);
     }
@@ -68,10 +74,10 @@ public class Player : MonoBehaviour
             Instantiate(deathEffect, transform.position, Quaternion.identity);
             StartCoroutine(GameOver());
         }
-
-        if(killEnemyCount == 10)
+        else if(cur_playerHealth > 0)
         {
-            
+            playerScript.enabled = true;
+            attackWeaponScript.enabled = true;
         }
 
         WeaponSwap();
@@ -119,8 +125,10 @@ public class Player : MonoBehaviour
         gameOverPanel.SetActive(true);
         Cursor.visible = true;
         crossHair.SetActive(false);
+        playerScript.enabled = false;
+        attackWeaponScript.enabled = false;
 
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
     }
 
     IEnumerator AlphaBlink()

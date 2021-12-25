@@ -82,7 +82,10 @@ public class GameManager : MonoBehaviour
         }
 
         StartGameWithKey();
-        versionText.text = "Version : " + Application.version;
+        if(versionText != null)
+        {
+            versionText.text = "Version : " + Application.version;
+        }
     }
 
     public void StartGameWithKey()
