@@ -36,9 +36,9 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         maxEnemyHealth = enemyHealth;
-        targetPlayer = GameObject.Find("Player").transform;
-        player = FindObjectOfType<Player>();
         objectPool = FindObjectOfType<ObjectPool>();
+        player = FindObjectOfType<Player>();
+        targetPlayer = GameObject.Find("Player").transform;
         shotSound = GetComponent<AudioSource>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
@@ -51,10 +51,10 @@ public class Enemy : MonoBehaviour
         Vector2 direction = targetPlayer.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
+        direction.Normalize();
+        
         rb.rotation = angle;
         movement = direction;
-
-        direction.Normalize();
 
         if(player.cur_playerHealth > 0)
         {
