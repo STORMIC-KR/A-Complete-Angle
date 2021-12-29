@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     Animator anim;
     Vector2 movement;
     [SerializeField] private Player player;
-    public enum Type { Normal, Giant };
+    public enum Type { Normal, Giant, Explosive };
     public Type enemyType;
     public GameObject deathEffect;
     public ObjectPool objectPool;
@@ -21,6 +21,11 @@ public class Enemy : MonoBehaviour
     int maxEnemyHealth;
     public float speed;
     public float attackRange;
+    public GameObject explodeEffect;
+    public float fieldOfExplode;
+    public float explodeForce;
+    public int explodeDamage;
+    public LayerMask layerToHit;
 
     [Header("Shot")]
     public AudioSource shotSound;
@@ -106,6 +111,13 @@ public class Enemy : MonoBehaviour
                         break;
                 }
             }
+
+            if(enemyType == Type.Explosive)
+            {
+                Explode();
+                print("Enemy Explode");
+                enemyHealth = 0;
+            }
         }
     }
 
@@ -113,6 +125,26 @@ public class Enemy : MonoBehaviour
     {
         enemyHealth -= damage;
         StartCoroutine("alphaBlink");
+    }
+    
+    void Explode()
+    {
+        Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, fieldOfExplode, layerToHit);
+
+        foreach(Collider2D obj in objects)
+        {
+            Vector2 direction = obj.transform.position - transform.position;
+            obj.GetComponent<Rigidbody2D>().AddForce(direction * explodeForce);
+            Instantiate(explodeEffect, transform.position, Quaternion.identity);
+            player.TakeDamage(explodeDamage);
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, fieldOfExplode);
+        Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
     void Dead()
@@ -123,7 +155,12 @@ public class Enemy : MonoBehaviour
             
             int itemRandomNum = Random.Range(0,10);
             player.killEnemyCount++;
-            Instantiate(deathEffect, transform.position, Quaternion.identity);
+
+            if(deathEffect != null)
+            {
+                Instantiate(deathEffect, transform.position, Quaternion.identity);
+            }
+
             Invoke("Restore", 0.1f);
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
 
