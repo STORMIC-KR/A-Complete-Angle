@@ -54,7 +54,7 @@ MonoBehaviour:
   deathEffect: {fileID: 751029183651457994, guid: 9ab3ff9f991fa5b44ac803b3dc5240dd, type: 3}
   objectPool: {fileID: 0}
   enemyHealth: 40
-  speed: 2
+  speed: 1
   attackRange: 2
   explodeEffect: {fileID: 751029183651457994, guid: 1573f8eaf59a9db429bc9db275537495, type: 3}
   fieldOfExplode: 2

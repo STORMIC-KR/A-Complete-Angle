@@ -158,7 +158,7 @@ public class Enemy : MonoBehaviour
             Invoke("Restore", 0.1f);
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
 
-            if(itemRandomNum < 4)
+            if(itemRandomNum < 6)
             {
                 return;
             }

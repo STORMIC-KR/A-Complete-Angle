@@ -50,16 +50,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  targetPlayer: {fileID: 0}
   enemyType: 0
   deathEffect: {fileID: 751029183651457994, guid: 9ab3ff9f991fa5b44ac803b3dc5240dd, type: 3}
   objectPool: {fileID: 0}
   enemyHealth: 20
   speed: 3
   attackRange: 5
+  explodeEffect: {fileID: 0}
+  fieldOfExplode: 0
+  explodeForce: 0
+  explodeDamage: 0
+  layerToExplode:
+    serializedVersion: 2
+    m_Bits: 0
   shotSound: {fileID: 0}
+  targetPlayer: {fileID: 0}
   shotPoint: {fileID: 8818698087639318850}
-  timeBtwShots: 1
+  timeBtwShots: 0.5
   healPack: {fileID: 5580782876494661826, guid: 4d4813dee94ddae44a93ffea67e95232, type: 3}
   speedUp: {fileID: 4805856810930162458, guid: 4c45e81b8e5ff774a873ee7940c8d044, type: 3}
 --- !u!212 &2683980823373561220
