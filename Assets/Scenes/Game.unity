@@ -526,13 +526,14 @@ MonoBehaviour:
   enemies:
   - 
   - 
+  - 
   objectPool: {fileID: 2079994827}
   player: {fileID: 0}
   waveText: {fileID: 1411613808}
   waveNum: 0
+  spawningEnemyCount: 0
   spawnRate: 5
   timeBtwWaves: 1
-  spawningEnemyCount: 0
 --- !u!4 &302888250
 Transform:
   m_ObjectHideFlags: 0
@@ -2267,15 +2268,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   helpPanel: {fileID: 0}
+  mobileController: {fileID: 1946212226}
+  gameOverPanel: {fileID: 93420063}
   deviceText: {fileID: 0}
   versionText: {fileID: 0}
-  mobileController: {fileID: 1946212226}
-  deviceType: 
-  playerScript: {fileID: 1607429118}
-  waveScript: {fileID: 302888249}
-  gameOverPanel: {fileID: 93420063}
   endingKillText: {fileID: 5347749}
   endingWaveText: {fileID: 1326617248}
+  playerScript: {fileID: 1607429118}
+  waveScript: {fileID: 302888249}
 --- !u!4 &930123938
 Transform:
   m_ObjectHideFlags: 0
@@ -4484,6 +4484,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1995661737}
   m_CullTransparentMesh: 1
+--- !u!1001 &2043839345
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2683980823373561221, guid: d00991577895d3b469e27c2b88bfa979, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683980823373561221, guid: d00991577895d3b469e27c2b88bfa979, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683980823373561221, guid: d00991577895d3b469e27c2b88bfa979, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683980823373561221, guid: d00991577895d3b469e27c2b88bfa979, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683980823373561221, guid: d00991577895d3b469e27c2b88bfa979, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683980823373561221, guid: d00991577895d3b469e27c2b88bfa979, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683980823373561221, guid: d00991577895d3b469e27c2b88bfa979, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683980823373561221, guid: d00991577895d3b469e27c2b88bfa979, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683980823373561221, guid: d00991577895d3b469e27c2b88bfa979, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683980823373561221, guid: d00991577895d3b469e27c2b88bfa979, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683980823373561221, guid: d00991577895d3b469e27c2b88bfa979, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2683980823373561223, guid: d00991577895d3b469e27c2b88bfa979, type: 3}
+      propertyPath: m_Name
+      value: Explosive_Enemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d00991577895d3b469e27c2b88bfa979, type: 3}
 --- !u!1 &2079994825
 GameObject:
   m_ObjectHideFlags: 0
@@ -4532,6 +4589,7 @@ MonoBehaviour:
   g_enemy_Bullet_Prefab: {fileID: 7390241416388671185, guid: 3038637f567072b4bb64387fae7d0e96, type: 3}
   normal_Enemy_Prefab: {fileID: 2683980823373561223, guid: f5d14f8415ab92848ace65ae6506f103, type: 3}
   tanker_Enemy_Prefab: {fileID: 1114736989960834571, guid: 3fb5191634fc7324b855e73995abb1ed, type: 3}
+  explosive_Enemy_Prefab: {fileID: 2683980823373561223, guid: d00991577895d3b469e27c2b88bfa979, type: 3}
   healPack_Prefab: {fileID: 5580782876494661826, guid: 4d4813dee94ddae44a93ffea67e95232, type: 3}
   speedUp_Prefab: {fileID: 4805856810930162458, guid: 4c45e81b8e5ff774a873ee7940c8d044, type: 3}
   bulletNum: 40
@@ -4539,5 +4597,6 @@ MonoBehaviour:
   g_BulletNum: 25
   n_EnemyNum: 15
   g_EnemyNum: 15
+  e_EnemyNum: 15
   healPackNum: 30
   speedPackNum: 30

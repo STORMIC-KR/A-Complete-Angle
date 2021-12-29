@@ -25,7 +25,7 @@ public class WaveSpawnSystem : MonoBehaviour
 
     void Awake()
     {
-        enemies = new string[] { "NEnemy", "TEnemy" };
+        enemies = new string[] { "NEnemy", "TEnemy", "EEnemy" };
         player = GameObject.FindGameObjectWithTag("Player");
         Invoke("TurnWaveON", 3f);
     }
