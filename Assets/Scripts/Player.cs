@@ -114,7 +114,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    void TakeDamage(int damage)
     {
         cur_playerHealth -= damage;
         StartCoroutine(AlphaBlink());
