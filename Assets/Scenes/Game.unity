@@ -529,11 +529,12 @@ MonoBehaviour:
   - 
   objectPool: {fileID: 2079994827}
   player: {fileID: 0}
+  spawnEffect: {fileID: 4698145950301157206, guid: ee7fe34b3bed91c4295e5f3cb69e234f, type: 3}
   waveText: {fileID: 1411613808}
   waveNum: 0
   spawningEnemyCount: 0
   spawnRate: 3
-  timeBtwWaves: 1
+  timeBtwWaves: 3
 --- !u!4 &302888250
 Transform:
   m_ObjectHideFlags: 0
@@ -3302,7 +3303,7 @@ GameObject:
   - component: {fileID: 1587586097}
   - component: {fileID: 1587586098}
   m_Layer: 0
-  m_Name: AttackWing
+  m_Name: Rifle_AttackWing
   m_TagString: AttackWing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

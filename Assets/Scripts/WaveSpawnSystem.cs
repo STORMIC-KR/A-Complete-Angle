@@ -11,6 +11,7 @@ public class WaveSpawnSystem : MonoBehaviour
     public string[] enemies;
     public ObjectPool objectPool;
     public GameObject player;
+    public GameObject spawnEffect;
 
     public Text waveText;
     
@@ -60,6 +61,8 @@ public class WaveSpawnSystem : MonoBehaviour
 
             if(spawnPosition != playerPosition)
             {
+                Instantiate(spawnEffect, spawnPosition, Quaternion.identity);
+                yield return new WaitForSeconds(1f);
                 GameObject enemy = objectPool.MakeObject(enemies[ranEnemy]);
                 enemy.transform.position = spawnPosition;
 
