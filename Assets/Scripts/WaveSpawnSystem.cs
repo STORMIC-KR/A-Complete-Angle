@@ -73,7 +73,7 @@ public class WaveSpawnSystem : MonoBehaviour
         waveNum += 1;
         waveIsDone = true;
         spawnRate -= 0.1f;
-        spawningEnemyCount += 1;
+        spawningEnemyCount += 3;
 
         yield return new WaitForSeconds(timeBtwWaves);
     }
