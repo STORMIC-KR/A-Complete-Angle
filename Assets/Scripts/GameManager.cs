@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using DiscordPresence;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class GameManager : MonoBehaviour
     public Text versionText;
     public Text endingKillText;
     public Text endingWaveText;
+
+    string detail;
+    string state;
 
     string deviceType;
 
@@ -47,6 +51,15 @@ public class GameManager : MonoBehaviour
     }
     void Update()
     {
+        if(SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            PresenceManager.UpdatePresence(detail: "In The Title", state: "Playing");
+        }
+        else if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            PresenceManager.UpdatePresence(detail: "In Game", state: "Playing");
+        }
+        
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(helpPanel != null)
