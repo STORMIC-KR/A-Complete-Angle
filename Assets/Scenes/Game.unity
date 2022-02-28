@@ -529,7 +529,7 @@ MonoBehaviour:
   - 
   objectPool: {fileID: 2079994827}
   player: {fileID: 0}
-  spawnEffect: {fileID: 4698145950301157206, guid: ee7fe34b3bed91c4295e5f3cb69e234f, type: 3}
+  spawnEffect: {fileID: 4698145950301157206, guid: 0fb6cf1a8eae35a42a9051c473597016, type: 3}
   waveText: {fileID: 1411613808}
   waveNum: 0
   spawningEnemyCount: 0
@@ -3602,7 +3602,7 @@ MonoBehaviour:
   killCountText: {fileID: 1886637198}
   wing: {fileID: 577737767}
   attackWing: {fileID: 1587586094}
-  deathEffect: {fileID: 751029183651457994, guid: 352d2de01b95dd54aaddcc6160a8957e, type: 3}
+  deathEffect: {fileID: 751029183651457994, guid: 49b2b43f42a177c47bdcfc54b23874d8, type: 3}
   crossHair: {fileID: 1031979306}
   healthBar: {fileID: 796376585}
   mapAnimator: {fileID: 1946939873}
