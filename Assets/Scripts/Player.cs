@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     public GameObject attackWing;
     public GameObject deathEffect;
     public GameObject crossHair;
+    public GameObject upgradePanel;
 
     public Slider healthBar;
     public Text killCountText;
@@ -134,10 +135,19 @@ public class Player : MonoBehaviour
     {
         if(levelScore >= maxLevelScore)
         {
+            //UpgradePlayer();
             levelScore = 0;
             levelCount++;
         }
     }
+
+    // public void UpgradePlayer()
+    // {
+    //     attackWeaponScript.enabled = false;
+    //     abilityHolder.enabled = false;
+    //     waveScript.enabled = false;
+    //     upgradePanel.SetActive(true);
+    // }
 
     IEnumerator GameOver()
     {

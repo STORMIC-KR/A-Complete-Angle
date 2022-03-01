@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
         {
             if(playerScript.cur_playerHealth <= 0)
             {
-                Invoke("FinishGame", 0.1f);
+                Invoke("FinishGame", 0.3f);
             }
         }
 
