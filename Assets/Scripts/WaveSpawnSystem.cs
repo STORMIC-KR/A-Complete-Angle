@@ -38,6 +38,11 @@ public class WaveSpawnSystem : MonoBehaviour
         {
             StartCoroutine(WaveSpawn());
         }
+
+        if(player.GetComponent<Player>().cur_playerHealth <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     void TurnWaveON()

@@ -16,8 +16,14 @@ public class Player : MonoBehaviour
     [Header("Player Stats")]
     public int cur_playerHealth;
     public int max_playerHealth;
+
+    public float timeBtwShots;
+
+    float maxLevelScore = 100f;
+    public float levelScore = 0;
+    public int levelCount = 1;
+
     public int killEnemyCount = 0;
-    public Text killCountText;
 
     Player playerScript;
 
@@ -29,42 +35,41 @@ public class Player : MonoBehaviour
     public GameObject crossHair;
 
     public Slider healthBar;
-    public Animator mapAnimator;
-    public GameManager gameManager;
+    public Text killCountText;
+    public Text levelText;
+    public Slider lvBar;
 
     public AudioSource shootItemSound;
-    public AudioSource healPackSound;
+    public AudioSource healItemSound;
     AttackWeapon attackWeaponScript;
     WaveSpawnSystem waveScript;
+    AbilityHolder abilityHolder;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         acceleration = normalAcceleration;
 
-        healthBar.value = (float)cur_playerHealth / (float)max_playerHealth;
+        healthBar.value = (float)cur_playerHealth / max_playerHealth;
         sr = GetComponent<SpriteRenderer>();
-        gameManager = FindObjectOfType<GameManager>();
 
         playerScript = GetComponent<Player>();
         attackWeaponScript = FindObjectOfType<AttackWeapon>().GetComponent<AttackWeapon>();
         waveScript = FindObjectOfType<WaveSpawnSystem>().GetComponent<WaveSpawnSystem>();
+        abilityHolder = FindObjectOfType<AbilityHolder>().GetComponent<AbilityHolder>();
     }
 
     void Update()
     {
-        if(SystemInfo.deviceType == DeviceType.Desktop)
-        {
-            float directionX = Input.GetAxisRaw("Horizontal");
-            float directionY = Input.GetAxisRaw("Vertical");
-            movementInput = new Vector2(directionX, directionY).normalized;
-            
-            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            wing.up = (mousePos - (Vector2)transform.position).normalized;
-        }
+        float directionX = Input.GetAxisRaw("Horizontal");
+        float directionY = Input.GetAxisRaw("Vertical");
+
+        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        movementInput = new Vector2(directionX, directionY).normalized;
+        wing.up = (mousePos - (Vector2)transform.position).normalized;
 
         healthBar.value = (float)cur_playerHealth / (float)max_playerHealth;
-
         killCountText.text = "Kill \n" + killEnemyCount;
 
         if(cur_playerHealth <= 0)
@@ -80,7 +85,11 @@ public class Player : MonoBehaviour
             waveScript.enabled = true;
         }
 
+        lvBar.value = levelScore / maxLevelScore;
+        levelText.text = "Lv." + levelCount;
+
         WeaponSwap();
+        LevelUP();
     }
 
     void FixedUpdate()
@@ -90,26 +99,23 @@ public class Player : MonoBehaviour
 
     public void WeaponSwap()
     {
-        if(SystemInfo.deviceType == DeviceType.Desktop)
+        if (Input.GetMouseButton(1))
         {
-            if (Input.GetMouseButton(1))
-            {
-                GameObject.Find("AttackWing").gameObject.GetComponent<SpriteRenderer>().enabled = false;
-                GameObject.Find("AttackWing").gameObject.GetComponent<AttackWeapon>().enabled = false;
+            GameObject.Find("AttackWing").gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            GameObject.Find("AttackWing").gameObject.GetComponent<AttackWeapon>().enabled = false;
 
-                GameObject.Find("DefenseWing").gameObject.GetComponent<SpriteRenderer>().enabled = true;
-                GameObject.Find("DefenseWing").gameObject.GetComponent<DefenseWeapon>().enabled = true;
-                GameObject.Find("DefenseWing").gameObject.GetComponent<BoxCollider2D>().enabled = true;
-            }
-            else
-            {
-                GameObject.Find("AttackWing").gameObject.GetComponent<SpriteRenderer>().enabled = true;
-                GameObject.Find("AttackWing").gameObject.GetComponent<AttackWeapon>().enabled = true;
+            GameObject.Find("DefenseWing").gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            GameObject.Find("DefenseWing").gameObject.GetComponent<DefenseWeapon>().enabled = true;
+            GameObject.Find("DefenseWing").gameObject.GetComponent<BoxCollider2D>().enabled = true;
+        }
+        else
+        {
+            GameObject.Find("AttackWing").gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            GameObject.Find("AttackWing").gameObject.GetComponent<AttackWeapon>().enabled = true;
                 
-                GameObject.Find("DefenseWing").gameObject.GetComponent<SpriteRenderer>().enabled = false;
-                GameObject.Find("DefenseWing").gameObject.GetComponent<DefenseWeapon>().enabled = false;
-                GameObject.Find("DefenseWing").gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            }
+            GameObject.Find("DefenseWing").gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            GameObject.Find("DefenseWing").gameObject.GetComponent<DefenseWeapon>().enabled = false;
+            GameObject.Find("DefenseWing").gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
     }
 
@@ -119,6 +125,20 @@ public class Player : MonoBehaviour
         StartCoroutine(AlphaBlink());
     }
 
+    public void LevelScoreUP(float levelIncrease)
+    {
+        levelScore += levelIncrease;
+    }
+
+    public void LevelUP()
+    {
+        if(levelScore >= maxLevelScore)
+        {
+            levelScore = 0;
+            levelCount++;
+        }
+    }
+
     IEnumerator GameOver()
     {
         yield return new WaitForSeconds(0.2f);
@@ -126,7 +146,9 @@ public class Player : MonoBehaviour
         crossHair.SetActive(false);
         playerScript.enabled = false;
         attackWeaponScript.enabled = false;
+        abilityHolder.enabled = false;
         waveScript.enabled = false;
+        gameObject.SetActive(false);
     }
 
     IEnumerator AlphaBlink()
@@ -159,7 +181,7 @@ public class Player : MonoBehaviour
             }
             else
             {
-                healPackSound.Play();
+                healItemSound.Play();
             }
         }
     }

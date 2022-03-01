@@ -15,4 +15,4 @@ MonoBehaviour:
   name: 
   coolDownTime: 0
   activeTime: 0.5
-  dashVelocity: 20
+  dashMultiplier: 4

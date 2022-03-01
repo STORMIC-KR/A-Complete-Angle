@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -13,14 +14,18 @@ public class Enemy : MonoBehaviour
     public enum Type { Normal, Giant, Explosive };
     public Type enemyType;
     public GameObject deathEffect;
-    public ObjectPool objectPool;
+    ObjectPool objectPool;
 
     [Header("Enemy Stats")]
     Enemy enemyScript;
+    public Image hpBar;
+    public GameObject hpCanvas;
     public int enemyHealth;
     int maxEnemyHealth;
     public float speed;
     public float attackRange;
+
+    [Header("Explode")]
     public GameObject explodeEffect;
     public float fieldOfExplode;
     public float explodeForce;
@@ -28,22 +33,23 @@ public class Enemy : MonoBehaviour
     public LayerMask layerToExplode;
 
     [Header("Shot")]
-    public AudioSource shotSound;
-    [SerializeField] private Transform targetPlayer;
+    AudioSource shotSound;
+
     public Transform shotPoint;
     public float timeBtwShots;
     float shotTime;
 
-    [Header("ItemDrop")]
+    [Header("Item")]
     public GameObject healPack;
     public GameObject speedUp;
 
     void Start()
     {
         maxEnemyHealth = enemyHealth;
+
         objectPool = FindObjectOfType<ObjectPool>();
         player = FindObjectOfType<Player>();
-        targetPlayer = GameObject.Find("Player").transform;
+
         shotSound = GetComponent<AudioSource>();
         sr = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
@@ -53,7 +59,9 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        Vector2 direction = targetPlayer.position - transform.position;
+        hpBar.fillAmount = (float)enemyHealth / maxEnemyHealth;
+
+        Vector2 direction = player.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         direction.Normalize();
@@ -65,9 +73,10 @@ public class Enemy : MonoBehaviour
         {
             enemyScript.enabled = true;
         }
-        else
+        else if(player.cur_playerHealth <= 0)
         {
             enemyScript.enabled = false;
+            gameObject.SetActive(false);
         }
     }
 
@@ -85,10 +94,10 @@ public class Enemy : MonoBehaviour
 
     void SearchAndShot()
     {
-        Vector2 direction = targetPlayer.position - transform.position;
+        Vector2 direction = player.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        if(Vector3.Distance(targetPlayer.position, transform.position) <= attackRange)
+        if(Vector3.Distance(player.transform.position, transform.position) <= attackRange)
         {
             if (Time.time >= shotTime)
             {
@@ -115,7 +124,6 @@ public class Enemy : MonoBehaviour
             if(enemyType == Type.Explosive)
             {
                 Explode();
-                print("Enemy Explode");
                 enemyHealth = 0;
             }
         }
@@ -150,10 +158,11 @@ public class Enemy : MonoBehaviour
     {
         if(enemyHealth <= 0)
         {
-            gameObject.SetActive(false);
+            this.gameObject.SetActive(false);
             
             int itemRandomNum = Random.Range(0,10);
             player.killEnemyCount++;
+            player.LevelScoreUP(5.0f);
             Instantiate(deathEffect, transform.position, Quaternion.identity);
             Invoke("Restore", 0.1f);
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);

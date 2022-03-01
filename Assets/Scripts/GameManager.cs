@@ -7,59 +7,29 @@ using DiscordPresence;
 
 public class GameManager : MonoBehaviour
 {
+    [Header("Objects")]
     public GameObject helpPanel;
-    public GameObject mobileController;
     public GameObject gameOverPanel;
 
-    public Text deviceText;
+    [Header("Texts")]
     public Text versionText;
     public Text endingKillText;
     public Text endingWaveText;
 
+    [Header("Discord")]
     string detail;
     string state;
 
-    string deviceType;
-
+    [Header("Scripts")]
     public Player playerScript;
     public WaveSpawnSystem waveScript;
 
     void Start()
     {
         Screen.SetResolution(2048, 1536, true);
-
-        switch(SystemInfo.deviceType)
-        {
-            case DeviceType.Desktop:
-                deviceType = "DeskTop";
-                break;
-            case DeviceType.Console:
-                deviceType = "Console";
-                break;
-            case DeviceType.Handheld:
-                deviceType = "Handheld";
-                break;
-            case DeviceType.Unknown:
-                deviceType = "Unknown";
-                break;
-        }
-
-        if(deviceText != null)
-        {
-            deviceText.text = "Your Device Type : " + deviceType;
-        }
     }
     void Update()
     {
-        if(SceneManager.GetActiveScene().buildIndex == 0)
-        {
-            PresenceManager.UpdatePresence(detail: "In The Title", state: "Playing");
-        }
-        else if(SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            PresenceManager.UpdatePresence(detail: "In Game", state: "Playing");
-        }
-        
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(helpPanel != null)
@@ -79,39 +49,36 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.F1))
+        if(gameOverPanel != null)
         {
-            if(SceneManager.GetActiveScene().buildIndex == 0)
+            if(playerScript.cur_playerHealth <= 0)
             {
-                CtrlHelpPanel();
-            }
-        }
-        
-        if(SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            if(SystemInfo.deviceType == DeviceType.Desktop)
-            {
-                mobileController.SetActive(false);
-            }
-            else if(SystemInfo.deviceType == DeviceType.Handheld)
-            {
-                mobileController.SetActive(true);
+                Invoke("FinishGame", 0.1f);
             }
         }
 
         StartGameWithKey();
-        if(versionText != null)
-        {
-            versionText.text = "Version : " + Application.version;
-        }
+        CtrlHelpPanel();
+        CtrlVersionText();
+        ManageDiscordPresence();
 
-        if(playerScript.cur_playerHealth <= 0)
+        if(endingKillText != null && endingWaveText != null)
         {
-            gameOverPanel.SetActive(true);
+            endingKillText.text = "Kill : " + playerScript.killEnemyCount;        
+            endingWaveText.text = "Wave : " + waveScript.waveNum;
         }
+    }
 
-        endingKillText.text = "Kill : " + playerScript.killEnemyCount;        
-        endingWaveText.text = "Wave : " + waveScript.waveNum;
+    public void ManageDiscordPresence()
+    {
+        if(SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            PresenceManager.UpdatePresence(detail: "In The Title", state: "Playing");
+        }
+        else if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            PresenceManager.UpdatePresence(detail: "In Game", state: "Playing");
+        }
     }
 
     public void StartGameWithKey()
@@ -120,7 +87,7 @@ public class GameManager : MonoBehaviour
         {
             if(SceneManager.GetActiveScene().buildIndex == 0)
             {
-                SceneManager.LoadScene("Game");
+                SceneManager.LoadScene("Game_InfiniteMode");
             }
         }
     }
@@ -129,7 +96,7 @@ public class GameManager : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().buildIndex == 0)
         {
-            SceneManager.LoadScene("Game");
+            SceneManager.LoadScene("Game_InfiniteMode");
         }
     }
 
@@ -139,22 +106,41 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    public void FinishGame()
+    {
+        gameOverPanel.SetActive(true);
+    }
+
     public void Menu()
     {
         SceneManager.LoadScene("Title");
     }
 
+    public void CtrlVersionText()
+    {
+        if(versionText != null)
+        {
+            versionText.text = "Version : " + Application.version;
+        }
+    }
+
     public void CtrlHelpPanel()
     {
-        if(helpPanel != null)
+        if(Input.GetKeyDown(KeyCode.F1))
         {
-            if(helpPanel.activeSelf == false)
+            if(SceneManager.GetActiveScene().buildIndex == 0)
             {
-                helpPanel.SetActive(true);
-            }
-            else
-            {
-                helpPanel.SetActive(false);
+                if(helpPanel != null)
+                {
+                    if(helpPanel.activeSelf == false)
+                    {
+                        helpPanel.SetActive(true);
+                    }
+                    else
+                    {
+                        helpPanel.SetActive(false);
+                    }
+                }
             }
         }
     }

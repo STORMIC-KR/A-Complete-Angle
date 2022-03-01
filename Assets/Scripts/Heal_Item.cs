@@ -5,10 +5,10 @@ using UnityEngine.Tilemaps;
 
 public class Heal_Item : Item
 {
-    public Tilemap roomWall;
+    Tilemap roomWall;
     public int healValue;
 
-    public ObjectPool objectPool;
+    ObjectPool objectPool;
     public GameObject healEffect;
 
     void Start()

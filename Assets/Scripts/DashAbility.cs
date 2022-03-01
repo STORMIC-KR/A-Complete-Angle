@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class DashAbility : Ability
 {
-    public float dashVelocity;
+    public float dashMultiplier;
 
     public override void Activate(GameObject parent)
     {
@@ -15,7 +15,7 @@ public class DashAbility : Ability
 
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f);
         
-        player.acceleration = dashVelocity;
+        player.acceleration *= dashMultiplier;
     }
     
     public override void BeginCoolDown(GameObject parent)

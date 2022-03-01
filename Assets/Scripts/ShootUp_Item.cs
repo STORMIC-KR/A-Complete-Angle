@@ -8,19 +8,19 @@ public class ShootUp_Item : Item
     Tilemap roomWall;
     public GameObject shootUpEffect;
 
-    AttackWeapon attackWeapon;
+    Player player;
     GameObject attackWingObj;
 
     void Start()
     {
         roomWall = GameObject.FindObjectOfType<Tilemap>();
+        player = GameObject.FindObjectOfType<Player>().GetComponent<Player>();
         attackWingObj = GameObject.FindGameObjectWithTag("AttackWing");
-        attackWeapon = attackWingObj.GetComponent<AttackWeapon>();
     }
 
     void Update()
     {
-        if(attackWeapon.timeBtwShots < 0.2)
+        if(player.timeBtwShots < 0.2)
         {
             roomWall.gameObject.GetComponent<Tilemap>().color = new Color(1f, 0.3f, 1f);
         }
@@ -41,8 +41,8 @@ public class ShootUp_Item : Item
     public override void RunItem()
     {
         #region shootup
-        attackWeapon.timeBtwShots /= 2;
-        if(attackWeapon.timeBtwShots < 0.2f)
+        player.timeBtwShots /= 2;
+        if(player.timeBtwShots < 0.2f)
         {
             roomWall.gameObject.GetComponent<Tilemap>().color = new Color(1f, 0.3f, 1f);
         }
@@ -56,9 +56,8 @@ public class ShootUp_Item : Item
     {
         #region shootup
         GameObject attackWingObj = GameObject.FindGameObjectWithTag("AttackWing");
-        AttackWeapon attackWeapon = attackWingObj.GetComponent<AttackWeapon>();
-        attackWeapon.timeBtwShots *= 2;
-        if(attackWeapon.timeBtwShots >= 0.2f)
+        player.timeBtwShots *= 2;
+        if(player.timeBtwShots >= 0.2f)
         {
             roomWall.gameObject.GetComponent<Tilemap>().color = Color.white;
         }
