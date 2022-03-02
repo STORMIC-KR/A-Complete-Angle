@@ -40,6 +40,8 @@ public class Player : MonoBehaviour
     public Text levelText;
     public Slider lvBar;
 
+    public Text testTxt;
+
     public AudioSource shootItemSound;
     public AudioSource healItemSound;
     AttackWeapon attackWeaponScript;
@@ -75,6 +77,7 @@ public class Player : MonoBehaviour
 
         if(cur_playerHealth <= 0)
         {
+            cur_playerHealth = 0;
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
             Instantiate(deathEffect, transform.position, Quaternion.identity);
             StartCoroutine(GameOver());
@@ -85,6 +88,8 @@ public class Player : MonoBehaviour
             attackWeaponScript.enabled = true;
             waveScript.enabled = true;
         }
+
+        testTxt.text = "Speed " + normalAcceleration + "\nMax_HP " + max_playerHealth + "\nDelay " + timeBtwShots + "\nCur_HP " + cur_playerHealth;
 
         lvBar.value = levelScore / maxLevelScore;
         levelText.text = "Lv." + levelCount;
@@ -135,19 +140,34 @@ public class Player : MonoBehaviour
     {
         if(levelScore >= maxLevelScore)
         {
-            //UpgradePlayer();
-            levelScore = 0;
-            levelCount++;
+            if(levelCount < 5)
+            {
+                upgradePanel.SetActive(true);
+                levelScore = 0;
+                levelCount++;
+                Time.timeScale = 0;
+            }
         }
     }
 
-    // public void UpgradePlayer()
-    // {
-    //     attackWeaponScript.enabled = false;
-    //     abilityHolder.enabled = false;
-    //     waveScript.enabled = false;
-    //     upgradePanel.SetActive(true);
-    // }
+    public void UpgradePlayer(string type)
+    {
+        switch(type)
+        {
+            case "speed":
+                normalAcceleration += 0.5f;
+            break;
+            case "health":
+                cur_playerHealth += 10;
+                max_playerHealth += 10;
+            break;
+            case "delay":
+                timeBtwShots -= 0.01f;
+            break;
+        }
+        Time.timeScale = 1;
+        upgradePanel.SetActive(false);
+    }
 
     IEnumerator GameOver()
     {
