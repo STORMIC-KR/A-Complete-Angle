@@ -60,6 +60,8 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         hpBar.fillAmount = (float)enemyHealth / maxEnemyHealth;
+        Vector3 hpCanvasAngle = Vector3.zero;
+        hpCanvas.transform.rotation = Quaternion.identity;
 
         Vector2 direction = player.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;

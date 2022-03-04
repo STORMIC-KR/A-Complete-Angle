@@ -176,7 +176,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 2880, y: 1440}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -191,8 +191,8 @@ Canvas:
   m_GameObject: {fileID: 201866103}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1067769777}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -345,7 +345,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: c54298f04b3a9c944819569c7380c365, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -374,7 +374,6 @@ GameObject:
   - component: {fileID: 433842073}
   - component: {fileID: 433842075}
   - component: {fileID: 433842074}
-  - component: {fileID: 433842076}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -422,7 +421,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: c54298f04b3a9c944819569c7380c365, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -440,21 +439,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 433842072}
   m_CullTransparentMesh: 1
---- !u!114 &433842076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 433842072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 6, y: -6}
-  m_UseGraphicAlpha: 1
 --- !u!1 &605928156
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,16 +483,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   helpPanel: {fileID: 1713223644}
-  mobileController: {fileID: 0}
   gameOverPanel: {fileID: 0}
-  deviceText: {fileID: 777358405}
+  playerStats: {fileID: 0}
   versionText: {fileID: 2053469891}
   endingKillText: {fileID: 0}
   endingWaveText: {fileID: 0}
-  detail: 
-  state: 
+  startText: {fileID: 0}
   playerScript: {fileID: 0}
   waveScript: {fileID: 0}
+  timerScript: {fileID: 0}
 --- !u!1 &643108274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,7 +1051,6 @@ GameObject:
   - component: {fileID: 1357452051}
   - component: {fileID: 1357452054}
   - component: {fileID: 1357452053}
-  - component: {fileID: 1357452052}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -1096,21 +1078,6 @@ RectTransform:
   m_AnchoredPosition: {x: -365, y: 0}
   m_SizeDelta: {x: 200, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1357452052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1357452050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 1}
-  m_EffectDistance: {x: 6, y: -6}
-  m_UseGraphicAlpha: 1
 --- !u!114 &1357452053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1131,7 +1098,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: c54298f04b3a9c944819569c7380c365, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1260,7 +1227,7 @@ MonoBehaviour:
   sharedProfile: {fileID: 11400000, guid: a4ea3ff302618184cbd74796cb9c6d59, type: 2}
   isGlobal: 1
   blendDistance: 0
-  weight: 1
+  weight: 0.2
   priority: 0
 --- !u!4 &1588311234
 Transform:
@@ -1468,7 +1435,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: c54298f04b3a9c944819569c7380c365, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1

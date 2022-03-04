@@ -10,11 +10,13 @@ public class GameManager : MonoBehaviour
     [Header("Objects")]
     public GameObject helpPanel;
     public GameObject gameOverPanel;
+    public GameObject playerStats;
 
     [Header("Texts")]
     public Text versionText;
     public Text endingKillText;
     public Text endingWaveText;
+    public Text startText;
 
     [Header("Discord")]
     string detail;
@@ -23,6 +25,7 @@ public class GameManager : MonoBehaviour
     [Header("Scripts")]
     public Player playerScript;
     public WaveSpawnSystem waveScript;
+    public StartTimer timerScript;
 
     void Start()
     {
@@ -54,6 +57,18 @@ public class GameManager : MonoBehaviour
             if(playerScript.cur_playerHealth <= 0)
             {
                 Invoke("FinishGame", 0.3f);
+            }
+        }
+        
+        if(timerScript != null)
+        {
+            if(Mathf.Floor(timerScript.selectCountDown) > 0)
+            {
+                playerStats.SetActive(false);
+            }
+            else if(Mathf.Floor(timerScript.selectCountDown) <= 0)
+            {
+                playerStats.SetActive(true);
             }
         }
 

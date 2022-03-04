@@ -7,7 +7,7 @@ public class StartTimer : MonoBehaviour
 {
     public Text timerText;
     public float time;
-    private float selectCountDown;
+    [HideInInspector] public float selectCountDown;
 
     void Start()
     {
