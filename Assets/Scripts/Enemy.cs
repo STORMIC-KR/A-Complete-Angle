@@ -192,24 +192,10 @@ public class Enemy : MonoBehaviour
             
             int itemRandomNum = Random.Range(0,10);
             player.killEnemyCount++;
+            player.LevelScoreUP(5.0f);
             Instantiate(deathEffect, transform.position, Quaternion.identity);
             Invoke("Restore", 0.1f);
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
-            switch(enemyType)
-            {
-                case Type.Normal:
-                    player.LevelScoreUP(3.0f);
-                    break;
-                case Type.Giant:
-                    player.LevelScoreUP(5.0f);
-                    break;
-                case Type.Explosive:
-                    player.LevelScoreUP(10f);
-                    break;
-                case Type.Shield:
-                    player.LevelScoreUP(15f);
-                    break;
-            }
 
             if(itemRandomNum < 6)
             {

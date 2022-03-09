@@ -55,7 +55,7 @@ MonoBehaviour:
   deathEffect: {fileID: 751029183651457994, guid: 2d5aa4d9cb525014c8b76548750508d6, type: 3}
   hpBar: {fileID: 1697058112229777346}
   hpCanvas: {fileID: 6614677531729311128}
-  enemyHealth: 40
+  enemyHealth: 30
   speed: 5
   attackRange: 2
   explodeEffect: {fileID: 751029183651457994, guid: 0ba85183e7115744c8fa18465c6323d1, type: 3}

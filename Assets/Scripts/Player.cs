@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
 
     public float timeBtwShots;
 
-    float maxLevelScore = 100f;
+    float maxLevelScore = 50f;
     public float levelScore = 0;
     public int levelCount = 1;
 
@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
 
     public GameObject attackWing;
     public GameObject deathEffect;
+    public GameObject hitEffect;
     public GameObject crossHair;
     public GameObject upgradePanel;
 
@@ -198,6 +199,7 @@ public class Player : MonoBehaviour
         {
             int damage = other.gameObject.GetComponent<Bullet>().damage;
             TakeDamage(damage);
+            Instantiate(hitEffect, other.transform.position, Quaternion.identity);
         }
     }
 

@@ -615,6 +615,7 @@ MonoBehaviour:
   wing: {fileID: 7971470264362165703}
   attackWing: {fileID: 7971470266296063438}
   deathEffect: {fileID: 751029183651457994, guid: 49b2b43f42a177c47bdcfc54b23874d8, type: 3}
+  hitEffect: {fileID: 751029183651457994, guid: 83370523e3a03c74f8a838ebc775f034, type: 3}
   crossHair: {fileID: 0}
   upgradePanel: {fileID: 0}
   healthBar: {fileID: 0}
