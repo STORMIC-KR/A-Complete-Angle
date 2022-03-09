@@ -10,6 +10,7 @@ public class ObjectPool : MonoBehaviour
     public GameObject normal_Enemy_Prefab;
     public GameObject tanker_Enemy_Prefab;
     public GameObject explosive_Enemy_Prefab;
+    public GameObject shield_Enemy_Prefab;
     public GameObject healPack_Prefab;
     public GameObject speedUp_Prefab;
 
@@ -19,6 +20,7 @@ public class ObjectPool : MonoBehaviour
     GameObject[] normal_Enemy;
     GameObject[] tanker_Enemy;
     GameObject[] explosive_Enemy;
+    GameObject[] shield_Enemy;
     GameObject[] healPack;
     GameObject[] speedUp_Item;
 
@@ -30,6 +32,7 @@ public class ObjectPool : MonoBehaviour
     public int n_EnemyNum;
     public int g_EnemyNum;
     public int e_EnemyNum;
+    public int s_EnemyNum;
     public int healPackNum;
     public int speedPackNum;
 
@@ -41,6 +44,7 @@ public class ObjectPool : MonoBehaviour
         normal_Enemy = new GameObject[n_EnemyNum];
         tanker_Enemy = new GameObject[g_EnemyNum];
         explosive_Enemy = new GameObject[e_EnemyNum];
+        shield_Enemy = new GameObject[s_EnemyNum];
         healPack = new GameObject[healPackNum];
         speedUp_Item = new GameObject[speedPackNum];
 
@@ -85,6 +89,12 @@ public class ObjectPool : MonoBehaviour
             explosive_Enemy[index].SetActive(false);
         }
 
+        for(int index = 0; index < shield_Enemy.Length; index++)
+        {
+            shield_Enemy[index] = Instantiate(shield_Enemy_Prefab);
+            shield_Enemy[index].SetActive(false);
+        }
+
         for(int index = 0; index < healPack.Length; index++)
         {
             healPack[index] = Instantiate(healPack_Prefab);
@@ -119,6 +129,9 @@ public class ObjectPool : MonoBehaviour
                 break;
             case "EEnemy":
                 targetPool = explosive_Enemy;
+                break;
+            case "SEnemy":
+                targetPool = shield_Enemy;
                 break;
             case "HealPack":
                 targetPool = healPack;

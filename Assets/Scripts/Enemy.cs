@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     Animator anim;
     Vector2 movement;
     [SerializeField] private Player player;
-    public enum Type { Normal, Giant, Explosive };
+    public enum Type { Normal, Giant, Explosive, Shield };
     public Type enemyType;
     public GameObject deathEffect;
     ObjectPool objectPool;
@@ -98,36 +98,76 @@ public class Enemy : MonoBehaviour
     {
         Vector2 direction = player.transform.position - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        GameObject wings = null;
+        GameObject shield = null;
+        GameObject attackWing = null;
 
-        if(Vector3.Distance(player.transform.position, transform.position) <= attackRange)
+        if(Vector3.Distance(player.transform.position, transform.position) <= attackRange) //만약 공격범위보다 가깝다면
         {
-            if (Time.time >= shotTime)
+            switch(enemyType)
             {
-                anim.Play("Enemy_Attack");
-                shotSound.Play();
-                GameObject bulletObj;
-                switch(enemyType)
-                {
-                    case Type.Normal:
-                        bulletObj = objectPool.MakeObject("N_EnemyBullet");
-                        bulletObj.transform.position = shotPoint.position;
-                        bulletObj.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-                        shotTime = Time.time + timeBtwShots;
-                        break;
-                    case Type.Giant:
-                        bulletObj = objectPool.MakeObject("G_EnemyBullet");
-                        bulletObj.transform.position = shotPoint.position;
-                        bulletObj.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-                        shotTime = Time.time + timeBtwShots;
-                        break;
-                }
-            }
+                case Type.Normal:
+                    Shot(angle, "N_EnemyBullet");
+                    break;
+                case Type.Giant:
+                    Shot(angle, "G_EnemyBullet");
+                    break;
+                case Type.Explosive:
+                    Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, fieldOfExplode, layerToExplode);
+                    foreach(Collider2D obj in objects)
+                    {
+                        Vector3 e_Direction = obj.transform.position - transform.position;
+                        obj.GetComponent<Rigidbody2D>().AddForce(e_Direction * explodeForce);
+                        Instantiate(explodeEffect, transform.position, Quaternion.identity);
+                        player.TakeDamage(explodeDamage);
+                        enemyHealth = 0;
+                    }
+                    break;
+                case Type.Shield:
+                    //방패 내리기
+                    wings = transform.GetChild(0).gameObject;
+                    attackWing = wings.transform.GetChild(0).gameObject;
+                    shield = wings.transform.GetChild(1).gameObject;
 
-            if(enemyType == Type.Explosive)
-            {
-                Explode();
-                enemyHealth = 0;
+                    shield.GetComponent<SpriteRenderer>().enabled = false;
+                    shield.GetComponent<DefenseWeapon>().enabled = false;
+                    shield.GetComponent<BoxCollider2D>().enabled = false;
+
+                    attackWing.GetComponent<SpriteRenderer>().enabled = true;
+                    
+                    Shot(angle, "N_EnemyBullet");
+                    break;
             }
+        }
+        else if(Vector3.Distance(player.transform.position, transform.position) > attackRange) //만약 공격범위보다 멀다면
+        {
+            if(enemyType == Type.Shield)
+            {
+                //방패 들기
+                wings = transform.GetChild(0).gameObject;
+                attackWing = wings.transform.GetChild(0).gameObject;
+                shield = wings.transform.GetChild(1).gameObject;
+
+                shield.GetComponent<SpriteRenderer>().enabled = true;
+                shield.GetComponent<DefenseWeapon>().enabled = true;
+                shield.GetComponent<BoxCollider2D>().enabled = true;
+
+                attackWing.GetComponent<SpriteRenderer>().enabled = false;
+            }
+        }
+    }
+
+    void Shot(float angle, string bulletType)
+    {
+        if (Time.time >= shotTime)
+        {
+            anim.Play("Enemy_Attack");
+            shotSound.Play();
+            GameObject bulletObj;
+            bulletObj = objectPool.MakeObject(bulletType);
+            bulletObj.transform.position = shotPoint.position;
+            bulletObj.transform.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+            shotTime = Time.time + timeBtwShots;
         }
     }
 
@@ -140,6 +180,7 @@ public class Enemy : MonoBehaviour
             obj.GetComponent<Rigidbody2D>().AddForce(direction * explodeForce);
             Instantiate(explodeEffect, transform.position, Quaternion.identity);
             player.TakeDamage(explodeDamage);
+            enemyHealth = 0;
         }
     }
 

@@ -128,12 +128,11 @@ MonoBehaviour:
   player: {fileID: 0}
   enemyType: 1
   deathEffect: {fileID: 751029183651457994, guid: 2d5aa4d9cb525014c8b76548750508d6, type: 3}
-  objectPool: {fileID: 0}
   hpBar: {fileID: 3582619225323500641}
   hpCanvas: {fileID: 7760712611850232866}
   enemyHealth: 100
   speed: 1
-  attackRange: 5
+  attackRange: 3
   explodeEffect: {fileID: 0}
   fieldOfExplode: 0
   explodeForce: 0
@@ -141,8 +140,6 @@ MonoBehaviour:
   layerToExplode:
     serializedVersion: 2
     m_Bits: 0
-  shotSound: {fileID: 0}
-  targetPlayer: {fileID: 0}
   shotPoint: {fileID: 2672608458530443390}
   timeBtwShots: 1.5
   healPack: {fileID: 5580782876494661826, guid: 4d4813dee94ddae44a93ffea67e95232, type: 3}

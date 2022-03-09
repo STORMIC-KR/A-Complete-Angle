@@ -8,7 +8,7 @@ public class DefenseWeapon : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Enemy_Bullet"))
+        if(other.CompareTag("Enemy_Bullet") || other.CompareTag("Bullet"))
         {
             Instantiate(shieldEffect, other.transform.position, Quaternion.identity);
             other.gameObject.SetActive(false);
