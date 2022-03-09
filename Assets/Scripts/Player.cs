@@ -143,6 +143,8 @@ public class Player : MonoBehaviour
             if(levelCount < 5)
             {
                 upgradePanel.SetActive(true);
+                Cursor.visible = true;
+                crossHair.SetActive(false);
                 levelScore = 0;
                 levelCount++;
                 Time.timeScale = 0;
@@ -166,6 +168,8 @@ public class Player : MonoBehaviour
             break;
         }
         Time.timeScale = 1;
+        Cursor.visible = false;
+        crossHair.SetActive(true);
         upgradePanel.SetActive(false);
     }
 

@@ -59,7 +59,7 @@ MonoBehaviour:
   speed: 5
   attackRange: 2
   explodeEffect: {fileID: 751029183651457994, guid: 0ba85183e7115744c8fa18465c6323d1, type: 3}
-  fieldOfExplode: 2
+  fieldOfExplode: 2.5
   explodeForce: 3000
   explodeDamage: 50
   layerToExplode:

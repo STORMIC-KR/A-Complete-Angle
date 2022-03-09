@@ -120,7 +120,7 @@ public class Enemy : MonoBehaviour
                         obj.GetComponent<Rigidbody2D>().AddForce(e_Direction * explodeForce);
                         Instantiate(explodeEffect, transform.position, Quaternion.identity);
                         player.TakeDamage(explodeDamage);
-                        enemyHealth = 0;
+                        this.gameObject.SetActive(false);
                     }
                     break;
                 case Type.Shield:
@@ -171,19 +171,6 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Explode()
-    {
-        Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, fieldOfExplode, layerToExplode);
-        foreach(Collider2D obj in objects)
-        {
-            Vector3 direction = obj.transform.position - transform.position;
-            obj.GetComponent<Rigidbody2D>().AddForce(direction * explodeForce);
-            Instantiate(explodeEffect, transform.position, Quaternion.identity);
-            player.TakeDamage(explodeDamage);
-            enemyHealth = 0;
-        }
-    }
-
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -205,10 +192,24 @@ public class Enemy : MonoBehaviour
             
             int itemRandomNum = Random.Range(0,10);
             player.killEnemyCount++;
-            player.LevelScoreUP(5.0f);
             Instantiate(deathEffect, transform.position, Quaternion.identity);
             Invoke("Restore", 0.1f);
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
+            switch(enemyType)
+            {
+                case Type.Normal:
+                    player.LevelScoreUP(3.0f);
+                    break;
+                case Type.Giant:
+                    player.LevelScoreUP(5.0f);
+                    break;
+                case Type.Explosive:
+                    player.LevelScoreUP(10f);
+                    break;
+                case Type.Shield:
+                    player.LevelScoreUP(15f);
+                    break;
+            }
 
             if(itemRandomNum < 6)
             {
