@@ -65,6 +65,9 @@ MonoBehaviour:
   layerToExplode:
     serializedVersion: 2
     m_Bits: 256
+  shieldLayer:
+    serializedVersion: 2
+    m_Bits: 32768
   shotPoint: {fileID: 8818698087639318850}
   timeBtwShots: 1
   healPack: {fileID: 5580782876494661826, guid: 4d4813dee94ddae44a93ffea67e95232, type: 3}
@@ -108,7 +111,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 0.75993484, g: 0.27058828, b: 1, a: 1}
   m_FlipX: 0

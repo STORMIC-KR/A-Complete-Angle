@@ -165,7 +165,6 @@ MonoBehaviour:
   player: {fileID: 0}
   enemyType: 0
   deathEffect: {fileID: 751029183651457994, guid: 2d5aa4d9cb525014c8b76548750508d6, type: 3}
-  objectPool: {fileID: 0}
   hpBar: {fileID: 5149041671564976365}
   hpCanvas: {fileID: 4654527973624558143}
   enemyHealth: 20
@@ -178,8 +177,6 @@ MonoBehaviour:
   layerToExplode:
     serializedVersion: 2
     m_Bits: 0
-  shotSound: {fileID: 0}
-  targetPlayer: {fileID: 0}
   shotPoint: {fileID: 8818698087639318850}
   timeBtwShots: 0.5
   healPack: {fileID: 5580782876494661826, guid: 4d4813dee94ddae44a93ffea67e95232, type: 3}
@@ -223,7 +220,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

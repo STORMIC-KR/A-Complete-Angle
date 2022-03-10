@@ -42,10 +42,7 @@ public class ShootUp_Item : Item
     {
         #region shootup
         player.timeBtwShots /= 2;
-        if(player.timeBtwShots < 0.2f)
-        {
-            roomWall.gameObject.GetComponent<Tilemap>().color = new Color(1f, 0.3f, 1f);
-        }
+        roomWall.gameObject.GetComponent<Tilemap>().color = new Color(1f, 0.3f, 1f);
         Instantiate(shootUpEffect, transform.position, Quaternion.identity);
         Invoke("ResetItemEffect", 5f);
         DestoryObject();

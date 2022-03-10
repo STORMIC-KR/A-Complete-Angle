@@ -12,6 +12,7 @@ TagManager:
   - RoomWall
   - AttackWing
   - ShootUp
+  - DefenseWing
   layers:
   - Default
   - TransparentFX
@@ -26,9 +27,9 @@ TagManager:
   - Item
   - Bullet
   - RoomWall
-  - 
-  - 
-  - 
+  - Enemy_Shield
+  - Enemy_Bullet
+  - Player_Defense
   - 
   - 
   - 

@@ -27,10 +27,12 @@ public class Enemy : MonoBehaviour
 
     [Header("Explode")]
     public GameObject explodeEffect;
+    CameraShake camShake;
     public float fieldOfExplode;
     public float explodeForce;
     public int explodeDamage;
     public LayerMask layerToExplode;
+    public LayerMask shieldLayer;
 
     [Header("Shot")]
     AudioSource shotSound;
@@ -48,6 +50,7 @@ public class Enemy : MonoBehaviour
         maxEnemyHealth = enemyHealth;
 
         objectPool = FindObjectOfType<ObjectPool>();
+        camShake = FindObjectOfType<CameraShake>();
         player = FindObjectOfType<Player>();
 
         shotSound = GetComponent<AudioSource>();
@@ -113,14 +116,27 @@ public class Enemy : MonoBehaviour
                     Shot(angle, "G_EnemyBullet");
                     break;
                 case Type.Explosive:
-                    Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position, fieldOfExplode, layerToExplode);
-                    foreach(Collider2D obj in objects)
+                    RaycastHit2D hit = Physics2D.Linecast(transform.position, player.transform.position, shieldLayer);
+                    if(hit.collider == null)
                     {
-                        Vector3 e_Direction = obj.transform.position - transform.position;
-                        obj.GetComponent<Rigidbody2D>().AddForce(e_Direction * explodeForce);
+                        camShake.OnShakeCamera(0.1f, 1.2f);
+                        //camShake.Shake();
+                        //Collider2D c_Player = Physics2D.OverlapCircle(transform.position, fieldOfExplode, layerToExplode);
+                        //c_Player.GetComponent<Rigidbody2D>().AddForce(direction * explodeForce);
                         Instantiate(explodeEffect, transform.position, Quaternion.identity);
                         player.TakeDamage(explodeDamage);
                         this.gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        if(hit.collider.tag == "DefenseWing")
+                        {
+                            camShake.OnShakeCamera(0.03f, 0.5f);
+                            //Collider2D c_Player = Physics2D.OverlapCircle(transform.position, fieldOfExplode, layerToExplode);
+                            //c_Player.GetComponent<Rigidbody2D>().AddForce(direction * explodeForce);
+                            Instantiate(explodeEffect, transform.position, Quaternion.identity);
+                            this.gameObject.SetActive(false);
+                        }
                     }
                     break;
                 case Type.Shield:
