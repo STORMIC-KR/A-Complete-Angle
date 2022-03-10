@@ -141,20 +141,20 @@ public class Player : MonoBehaviour
     {
         if(levelScore >= maxLevelScore)
         {
-            if(levelCount < 5)
-            {
-                upgradePanel.SetActive(true);
-                Cursor.visible = true;
-                crossHair.SetActive(false);
-                levelScore = 0;
-                levelCount++;
-                Time.timeScale = 0;
-            }
+            upgradePanel.SetActive(true);
+            Cursor.visible = true;
+            crossHair.SetActive(false);
+            levelScore = 0;
+            levelCount++;
+            Time.timeScale = 0;
         }
     }
 
     public void UpgradePlayer(string type)
     {
+        //normalAcceleration = 5
+        //max_playerHealth = 100
+        //timeBtwShots = 0.5
         switch(type)
         {
             case "speed":
