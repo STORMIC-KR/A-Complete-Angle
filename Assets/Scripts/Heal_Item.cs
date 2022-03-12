@@ -5,7 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class Heal_Item : Item
 {
-    Tilemap roomWall;
     public int healValue;
 
     ObjectPool objectPool;
@@ -13,7 +12,6 @@ public class Heal_Item : Item
 
     void Start()
     {
-        roomWall = GameObject.FindObjectOfType<Tilemap>();
         objectPool = FindObjectOfType<ObjectPool>();
     }
 
@@ -30,7 +28,6 @@ public class Heal_Item : Item
         Player player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         if(player.cur_playerHealth < player.max_playerHealth)
             {
-                roomWall.gameObject.GetComponent<Tilemap>().color = new Color(0.3f, 1f, 0.3f);
                 player.cur_playerHealth += healValue;
                 Instantiate(healEffect, transform.position, Quaternion.identity);
                 gameObject.SetActive(false);
@@ -49,6 +46,6 @@ public class Heal_Item : Item
 
     public override void ResetItemEffect()
     {
-        roomWall.gameObject.GetComponent<Tilemap>().color = Color.white;
+        
     }
 }
