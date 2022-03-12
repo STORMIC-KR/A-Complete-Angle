@@ -177,6 +177,9 @@ MonoBehaviour:
   layerToExplode:
     serializedVersion: 2
     m_Bits: 0
+  shieldLayer:
+    serializedVersion: 2
+    m_Bits: 0
   shotPoint: {fileID: 8818698087639318850}
   timeBtwShots: 1
   healPack: {fileID: 5580782876494661826, guid: 4d4813dee94ddae44a93ffea67e95232, type: 3}
@@ -717,7 +720,7 @@ GameObject:
   - component: {fileID: 6560459820661361688}
   - component: {fileID: 7151064778288449745}
   - component: {fileID: 2540104041344075222}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Enemy_DefenseWing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -210,7 +210,7 @@ public class Enemy : MonoBehaviour
             player.killEnemyCount++;
             player.LevelScoreUP(5.0f);
             Instantiate(deathEffect, transform.position, Quaternion.identity);
-            Invoke("Restore", 0.1f);
+            Invoke("Restore", 0.01f);
             sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 1);
 
             if(itemRandomNum < 6)

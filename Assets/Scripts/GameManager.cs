@@ -73,7 +73,6 @@ public class GameManager : MonoBehaviour
         }
 
         StartGameWithKey();
-        CtrlHelpPanel();
         CtrlVersionText();
         ManageDiscordPresence();
 
@@ -141,21 +140,15 @@ public class GameManager : MonoBehaviour
 
     public void CtrlHelpPanel()
     {
-        if(Input.GetKeyDown(KeyCode.F1))
+        if(helpPanel != null)
         {
-            if(SceneManager.GetActiveScene().buildIndex == 0)
+            if(helpPanel.activeSelf == false)
             {
-                if(helpPanel != null)
-                {
-                    if(helpPanel.activeSelf == false)
-                    {
-                        helpPanel.SetActive(true);
-                    }
-                    else
-                    {
-                        helpPanel.SetActive(false);
-                    }
-                }
+                helpPanel.SetActive(true);
+            }
+            else
+            {
+                helpPanel.SetActive(false);
             }
         }
     }
