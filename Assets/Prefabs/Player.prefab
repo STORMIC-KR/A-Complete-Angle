@@ -125,7 +125,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: 70e583e9962ca1844a44a3f27f861fb8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -426,7 +426,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: 1f7bb6f03d2b54844ba104c309e8caaa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -619,9 +619,11 @@ MonoBehaviour:
   crossHair: {fileID: 0}
   upgradePanel: {fileID: 0}
   healthBar: {fileID: 0}
+  upgradeHistoryText: {fileID: 0}
   killCountText: {fileID: 0}
   levelText: {fileID: 0}
   lvBar: {fileID: 0}
+  shotUpgradeBtn: {fileID: 0}
   testTxt: {fileID: 0}
   shootItemSound: {fileID: 7971470266314628578}
   healItemSound: {fileID: 7971470266314628579}

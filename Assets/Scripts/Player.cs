@@ -23,23 +23,28 @@ public class Player : MonoBehaviour
     public float levelScore = 0;
     public int levelCount = 1;
 
+    [Header("Upgrade")]
+    int speedUpgradeCount;
+    int delayDownCount;
+    int hpUpgradeCount;
     public int killEnemyCount = 0;
-
     Player playerScript;
 
     [Header("Player Gadgets")]
     public Transform wing;
-
     public GameObject attackWing;
     public GameObject deathEffect;
     public GameObject hitEffect;
     public GameObject crossHair;
     public GameObject upgradePanel;
-
+    public GameObject gameOverPanel;
     public Slider healthBar;
+    public Text upgradeHistoryText;
     public Text killCountText;
     public Text levelText;
     public Slider lvBar;
+
+    public Button shotUpgradeBtn;
 
     public Text testTxt;
 
@@ -90,6 +95,7 @@ public class Player : MonoBehaviour
             waveScript.enabled = true;
         }
 
+        upgradeHistoryText.text = "Stats" + "\nSpeed : " + normalAcceleration + "\nHP : " + max_playerHealth + "\nDelay : " + timeBtwShots;
         testTxt.text = "Speed " + normalAcceleration + "\nMax_HP " + max_playerHealth + "\nDelay " + timeBtwShots + "\nCur_HP " + cur_playerHealth;
 
         lvBar.value = levelScore / maxLevelScore;
@@ -159,13 +165,24 @@ public class Player : MonoBehaviour
         {
             case "speed":
                 normalAcceleration += 0.5f;
+                speedUpgradeCount++;
             break;
             case "health":
                 cur_playerHealth += 10;
                 max_playerHealth += 10;
+                hpUpgradeCount++;
             break;
             case "delay":
                 timeBtwShots -= 0.01f;
+                if(timeBtwShots <= 0.01)
+                {
+                    shotUpgradeBtn.interactable = false;
+                }
+                else
+                {
+                    shotUpgradeBtn.interactable = true;
+                }
+                delayDownCount++;
             break;
         }
         Time.timeScale = 1;
@@ -174,10 +191,16 @@ public class Player : MonoBehaviour
         upgradePanel.SetActive(false);
     }
 
+    public void FinishGame()
+    {
+        gameOverPanel.SetActive(true);
+    }
+
     IEnumerator GameOver()
     {
         yield return new WaitForSeconds(0.2f);
         Cursor.visible = true;
+        Invoke("FinishGame", 0.3f);
         crossHair.SetActive(false);
         playerScript.enabled = false;
         attackWeaponScript.enabled = false;

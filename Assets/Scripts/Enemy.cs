@@ -120,9 +120,6 @@ public class Enemy : MonoBehaviour
                     if(hit.collider == null)
                     {
                         camShake.OnShakeCamera(0.1f, 1.2f);
-                        //camShake.Shake();
-                        //Collider2D c_Player = Physics2D.OverlapCircle(transform.position, fieldOfExplode, layerToExplode);
-                        //c_Player.GetComponent<Rigidbody2D>().AddForce(direction * explodeForce);
                         Instantiate(explodeEffect, transform.position, Quaternion.identity);
                         player.TakeDamage(explodeDamage);
                         this.gameObject.SetActive(false);
@@ -132,8 +129,6 @@ public class Enemy : MonoBehaviour
                         if(hit.collider.tag == "DefenseWing")
                         {
                             camShake.OnShakeCamera(0.03f, 0.5f);
-                            //Collider2D c_Player = Physics2D.OverlapCircle(transform.position, fieldOfExplode, layerToExplode);
-                            //c_Player.GetComponent<Rigidbody2D>().AddForce(direction * explodeForce);
                             Instantiate(explodeEffect, transform.position, Quaternion.identity);
                             this.gameObject.SetActive(false);
                         }

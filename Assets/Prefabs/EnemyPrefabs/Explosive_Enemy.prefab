@@ -56,7 +56,7 @@ MonoBehaviour:
   hpBar: {fileID: 1697058112229777346}
   hpCanvas: {fileID: 6614677531729311128}
   enemyHealth: 30
-  speed: 5
+  speed: 8
   attackRange: 2
   explodeEffect: {fileID: 751029183651457994, guid: 0ba85183e7115744c8fa18465c6323d1, type: 3}
   fieldOfExplode: 2.5
