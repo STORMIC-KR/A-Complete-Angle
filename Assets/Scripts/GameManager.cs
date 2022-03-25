@@ -50,29 +50,23 @@ public class GameManager : MonoBehaviour
             endingKillText.text = "Kill : " + playerScript.killEnemyCount;        
             endingWaveText.text = "Wave : " + waveScript.waveNum;
         }
-        
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            if(gameMenuPanel.activeSelf == true)
-            {
-                gameMenuPanel.SetActive(false);
-            }
-
-            if(helpPanel.activeSelf == true)
-            {
-                helpPanel.SetActive(false);
-            }
-        }
 
         CtrlVersionText();
         ManageDiscordPresence();
     }
 
-    public void TurnOnGameMenu()
+    public void CtrlGameMenu()
     {
         if(gameMenuPanel != null)
         {
-            gameMenuPanel.SetActive(true);
+            if(gameMenuPanel.activeSelf == false)
+            {
+                gameMenuPanel.SetActive(true);
+            }
+            else
+            {
+                gameMenuPanel.SetActive(false);
+            }
         }
     }
 
@@ -107,7 +101,14 @@ public class GameManager : MonoBehaviour
     {
         if(helpPanel != null)
         {
-            helpPanel.SetActive(true);
+            if(helpPanel.activeSelf == false)
+            {
+                helpPanel.SetActive(true);
+            }
+            else
+            {
+                helpPanel.SetActive(false);
+            }
         }
     }
 
