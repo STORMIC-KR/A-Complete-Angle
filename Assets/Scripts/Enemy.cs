@@ -74,6 +74,15 @@ public class Enemy : MonoBehaviour
         rb.rotation = angle;
         movement = direction;
 
+        if(enemyHealth < maxEnemyHealth)
+        {
+            hpCanvas.SetActive(true);
+        }
+        else
+        {
+            hpCanvas.SetActive(false);
+        }
+
         if(player.cur_playerHealth > 0)
         {
             enemyScript.enabled = true;

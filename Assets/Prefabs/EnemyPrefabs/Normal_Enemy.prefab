@@ -177,6 +177,9 @@ MonoBehaviour:
   layerToExplode:
     serializedVersion: 2
     m_Bits: 0
+  shieldLayer:
+    serializedVersion: 2
+    m_Bits: 0
   shotPoint: {fileID: 8818698087639318850}
   timeBtwShots: 0.5
   healPack: {fileID: 5580782876494661826, guid: 4d4813dee94ddae44a93ffea67e95232, type: 3}
@@ -484,7 +487,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &429806999058174338
 RectTransform:
   m_ObjectHideFlags: 0
